@@ -1,0 +1,88 @@
+.btnFocus {
+  background: #505050;
+  color: #ffffff;
+}
+
+.fontclass-chica-subt {
+
+  font-size: 15px !important;
+  font-style: bold;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-title {
+
+  font-size: 20px !important;
+  font-style: bold;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.iconProp {
+  width: 15px;
+  font-size: 9px;
+}
+
+/*
+.content{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}*/
+
+.iconPropDialog {
+  width: 58px;
+}
+
+.padre {
+  display: flex;
+  justify-content: center;
+}
+
+.hijo {
+  padding: 2px;
+  margin: 10px;
+}
+
+.loading-main {
+  width: 30px;
+  height: 30px;
+}
+
+.text-error {
+  //background-color: cornflowerblue;
+  width: 230px;
+  height: 35px;
+  font-size: 9pt;
+  color: red;
+  text-align: left;
+  float: left;
+}
+
+.separator-button {
+  //background-color: cadetblue;
+  width: 210px;
+  height: 35px;
+  float: left;
+}
+
+.ta-custom {
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.fontclass-chica-label-error-message {
+
+  font-size: 10px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+  color: red;
+  margin-right: 40px;
+}
+
+::ng-deep {
+  .mat-select-panel {
+    transform: translate(-15px, -8px) !important;
+  }
+}

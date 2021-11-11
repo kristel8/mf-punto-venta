@@ -1,0 +1,49 @@
+<h2 mat-dialog-title class="fontclass-chica-title">{{ title }}</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="content">
+  <div class="padre">
+    <div class="hijo">
+      <img class="iconPropDialog" src="assets/images/warningicon.png" />
+    </div>
+    <!--
+        <div class="hijo"><p class="fontclass-chica-subt"> {{body}} </p></div>
+        -->
+    <div class="format-main fontclass-chica-combo">
+      <p>
+        El rol contiene ({{ body.icount }}) usuarios asociado, De los cuales
+        solo se listaran ({{ totalMax }}) a continuación:
+      </p>
+      <p *ngFor="let user of listUserOfRol">- {{ user.username }}</p>
+      <!-- <p>Desea eliminar el Rol?</p> -->
+      <p>{{ questionDialog }}</p>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+  <!-- <div *ngIf="showCharge">
+    <img
+      class="loading-main"
+      src="assets/images/loading.gif"
+      alt="Loading-img"
+    />
+  </div>-->
+  <button
+    mat-stroked-button
+    type="button"
+    (click)="callBack()"
+    class="btnFocus fontclass-chica-subt"
+    *ngIf="!showCharge"
+  >
+    <mat-icon>check</mat-icon> Aceptar
+  </button>
+  <button
+    mat-stroked-button
+    type="button"
+    (click)="onNoClick()"
+    class="fontclass-chica-subt"
+    >
+    Cancelar
+  </button>
+  <!-- *ngIf="!showCharge" -->
+</mat-dialog-actions>

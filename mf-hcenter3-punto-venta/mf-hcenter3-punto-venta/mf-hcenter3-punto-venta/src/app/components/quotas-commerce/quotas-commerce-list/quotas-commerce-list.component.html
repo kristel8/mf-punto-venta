@@ -1,0 +1,109 @@
+<div class="hp-container">
+  <div class="header__bac">
+    <div class="header__bac-tree">
+      <label class="label-prev-chev">Configuración de punto de venta</label>
+      <mat-icon style="font-family: 'Material Icons'">{{
+        "chevron_right"
+      }}</mat-icon>
+      <label class="label-post-chev">Cupo de comercio</label>
+    </div>
+    <div class="header__bac-actions">
+      <h2>Cupos de Comercio</h2>
+      <button class="btn__elimination" *ngIf="isEliminationMode">
+        Modo eliminación
+        <mat-icon (click)="toggleEliminationModeTable()">close</mat-icon>
+      </button>
+      <div class="blank-space"></div>
+      <div>
+        <label *ngIf="isEliminationMode && selectItems.length > 0">
+          {{ selectItems.length }} registro(s) seleccionado(s)
+        </label>
+        <button
+          mat-button
+          class="hp__buttons-save"
+          *ngIf="!isEliminationMode"
+          [routerLink]="['/config-red/cupo-comercio/crear-cupo']"
+          [disabled]="isValidAccessLevel"
+        >
+          Nuevo
+        </button>
+        <button
+          mat-button
+          class="hp__buttons-save"
+          (click)="popupDelete()"
+          *ngIf="isEliminationMode"
+          [disabled]="isValidAccessLevel"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="hp-header">
+    <h3 class="hp-title">Cupos de Comercio</h3>
+    <div class="hp-path">
+      <span class="material-icons">home</span>
+      <span class="material-icons">navigate_next</span>
+      Configuración de punto de venta
+      <span class="material-icons">navigate_next</span>
+      Cupo de comercio
+    </div>
+  </div>
+  <mat-divider></mat-divider> -->
+  <div class="hp-module-loader" *ngIf="showLoaderCupos; else elseBlock">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+  <ng-template #elseBlock>
+    <!-- <div class="text-right my-3">
+      <button
+        mat-button
+        class="hp-button-primary mr-2"
+        [routerLink]="['/config-red/cupo-comercio/crear-cupo']"
+        [disabled]="isValidAccessLevel"
+      >
+        Nuevo
+      </button>
+      <button
+        mat-button
+        class="hp-button-primary"
+        [disabled]="isValidAccessLevel"
+        (click)="popupDelete()"
+      >
+        Eliminar
+      </button>
+    </div> -->
+<div class="hp-group ">
+      <div class="hp-group-body">
+        <app-dynamictable
+          [disableButtonDelete]=isValidAccessLevel
+          [dataTable]="data"
+          [showColumns]="showColumns"
+          [menuColumns]="menuColumns"
+          [componenteDialog]="componenteDialog"
+          [selectIdValue]="selectIdValue"
+          [checkBox]="checkBox"
+          [arrayOfTable]="arrayOfTable"
+          [clearFilter]="clearFilter"
+          [checkBoxColor]="checkBoxColor"
+          [uniqueSelect]="false"
+          (outPutEventEmitter)="processDataOutPut(utils.getDataOutPut($event))"
+          *ngIf="utils.dataIsValid(data)"
+          [typeHeight]="'vh'"
+          [animal]="animal"
+          [name]="name"
+          [isMasterTable]="true"
+          [eliminationMode]="isEliminationMode"
+          [isClickableRow]="true"
+          (isEliminationMode)="toggleEliminationMode($event)"
+          (requestDeleteRow)="
+            processDataOutPut(utils.getDataOutPut($event)); popupDelete()
+          "
+          [deleteMany]="false"
+          #table
+        >
+        </app-dynamictable>
+      </div>
+    </div>
+  </ng-template>
+</div>

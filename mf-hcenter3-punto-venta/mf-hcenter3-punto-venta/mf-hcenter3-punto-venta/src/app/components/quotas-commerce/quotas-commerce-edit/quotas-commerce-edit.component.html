@@ -1,0 +1,257 @@
+<div class="hp-container mb-4">
+  <div class="header__bac">
+    <div class="header__bac-tree">
+      <label class="label-prev-chev">Configuración de punto de venta</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+      <label class="label-prev-chev">Cupo de comercio</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+
+      <label class="label-post-chev">Editar</label>
+    </div>
+
+    <label class="fontH">Editar Cupos</label>
+  </div>
+
+
+
+  <!-- <div class="hp-header">
+    <h3 class="hp-title">Editar Cupos</h3>
+    <div class="hp-path">
+      <span class="material-icons">home</span>
+      <span class="material-icons">navigate_next</span>
+      Configuración de punto de venta
+      <span class="material-icons">navigate_next</span>
+      Cupo de comercio
+      <span class="material-icons">navigate_next</span>
+      Editar
+    </div>
+  </div>
+  <mat-divider></mat-divider> -->
+
+  <div class="hp-module-loader" *ngIf="showLoaderData; else elseBlock">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+  <ng-template #elseBlock>
+    <div class="form-horizontal">
+
+      <form #form="ngForm" (submit)="guardar()">
+
+      <div class="text-right my-3">
+        <div class="row">
+          <div class="col">
+              <div class="row pl-3 mt-2">
+                  <span class="material-icons back-to-list" [routerLink]="['/config-red/cupo-comercio']">arrow_back_ios</span>
+                  <h3 class="fontH back-to-list" [routerLink]="['/config-red/cupo-comercio']">Atrás</h3>
+              </div>
+          </div>
+
+          <div class="col d-flex justify-content-end">
+              <button mat-button class="hp-button-save mr-2" type="submit" [disabled]="isValidAccessLevelModify || isQuotaSaveProccess"><span class="material-icons-outlined mr-1" >save</span>Guardar</button>
+              <button mat-button class="hp-button-delete"    type="button" (click)="popupDelete()" [disabled]="isValidAccessLevel"><span class="material-icons-outlined mr-1">delete</span>Eliminar</button>
+          </div>
+      </div>
+
+      </div>
+
+
+      <div class="hp-group" >
+        <div class="hp-group-header">
+          <div class="hp-title">
+            <mat-icon>list_alt</mat-icon>
+            Información General
+          </div>
+        </div>
+        <div class="hp-group-body">
+          <div class="row">
+            <div class="col-sm-6 col-lg-4">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Comercio
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    readonly
+                    type="text"
+                    [value]="merchant.merchantName"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Perfil de Comercio
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    readonly
+                    type="text"
+                    [value]="merchant.profileId"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Aplicación
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    readonly
+                    type="text"
+                    [value]="utils.getAppNameById(merchant.applicationId)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+      <ng-container *ngIf="showData">
+        <div class="hp-group" >
+          <div class="hp-group-header">
+            <div class="hp-title">
+              <mat-icon>list_alt</mat-icon>
+              Transacciones
+              <div class="ml-4">
+                <button
+                  mat-button
+                  class="hp-button-primary mr-2"
+                  (click)="addCupos()"
+                >
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="hp-group-body">
+            <app-dynamictable
+              *ngIf="utils.dataIsValid(transactions)"
+              [dataTable]="transactions"
+              [showColumns]="showColumnsTransaction"
+              [menuColumns]="menuColumnsTransaction"
+              [havePaginator]="havePaginator"
+              [componenteDialog]=""
+              [selectIdValue]="selectIdValue"
+              [checkBox]="checkBox"
+              [arrayOfTable]="arrayOfTable"
+              [clearFilter]="clearFilter"
+              [checkBoxColor]="checkBoxColor"
+              [deleteMany]="false"
+              [porcentajeTamaño]="0.5"
+              (outPutEventEmitter)="
+                processDataOutPutTransaction(utils.getDataOutPut($event))
+              "
+              [animal]="animal"
+              [name]="name"
+              #table
+            >
+            </app-dynamictable>
+          </div>
+        </div>
+
+        <div class="hp-group" style="margin-top: 20px;">
+          <div class="hp-group-header">
+            <div class="hp-title">
+              <mat-icon>list_alt</mat-icon>
+              Periodo Diario
+              <div class="ml-4">
+                <button
+                  mat-button
+                  class="hp-button-primary mr-2"
+                  (click)="deleteDiario()"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="hp-group-body">
+            <app-dynamictable
+              *ngIf="utils.dataIsValid(quotasDiario)"
+              [dataTable]="quotasDiario"
+              [showColumns]="showColumnsDiario"
+              [menuColumns]="menuColumnsDiario"
+              [havePaginator]="havePaginator"
+              [selectIdValue]="selectIdValue"
+              [checkBox]="checkBox"
+              [arrayOfTable]="arrayOfTable"
+              [deleteMany]="false"
+              [clearFilter]="clearFilter"
+              [checkBoxColor]="checkBoxColor"
+              [porcentajeTamaño]="0.5"
+              (outPutEventEmitter)="
+                processDataOutPutDiario(utils.getDataOutPut($event))
+              "
+              (clickRowEventEmitter)="clickRowDiario($event)"
+              [isClickableRow]="true"
+              [animal]="animal"
+              [name]="name"
+              #tableDiario
+            >
+            </app-dynamictable>
+          </div>
+        </div>
+        <div class="hp-group" style="margin-top: 20px;">
+          <div class="hp-group-header">
+            <div class="hp-title">
+              <mat-icon>list_alt</mat-icon>
+              Periodo Mensual
+              <div class="ml-4">
+                <button
+                  mat-button
+                  class="hp-button-primary mr-2"
+                  (click)="deleteMensual()"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="hp-group-body">
+            <app-dynamictable
+              *ngIf="utils.dataIsValid(quotasMensual)"
+              [dataTable]="quotasMensual"
+              [showColumns]="showColumnsMensual"
+              [menuColumns]="menuColumnsMensual"
+              [havePaginator]="havePaginator"
+              [selectIdValue]="selectIdValue"
+              [checkBox]="checkBox"
+              [arrayOfTable]="arrayOfTable"
+              [deleteMany]="false"
+              [clearFilter]="clearFilter"
+              [checkBoxColor]="checkBoxColor"
+              [porcentajeTamaño]="0.5"
+              (outPutEventEmitter)="
+                processDataOutPutMensual(utils.getDataOutPut($event))
+              "
+              (clickRowEventEmitter)="clickRowMensual($event)"
+              [isClickableRow]="true"
+              [animal]="animal"
+              [name]="name"
+              #tableMensual
+            >
+            </app-dynamictable>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+  </ng-template>
+
+
+
+  <div *ngIf="showError" class="error-msg">
+    Error al cargar la informacion, favor de contactarse con el administrador
+  </div>
+  <div class="hp-module-loader" *ngIf="isQuotaSaveProccess">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+</div>

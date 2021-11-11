@@ -1,0 +1,102 @@
+<h2 mat-dialog-title class="fontclass-chica-title">{{ title }}</h2>
+<!-- <mat-divider></mat-divider> -->
+<mat-dialog-content class="content">
+  <div class="padre">
+    <!-- <div class="hijo"><img class="iconPropDialog" src="assets/images/warningicon.png"></div> -->
+    <div class="hijo">
+      <div *ngIf="writeOnlyComment && !isApprovalFlow">
+        <span class="fontclass-chica-subt">Seleccione Aplicación: </span>
+        <!-- <select [(ngModel)]="selectApp">
+          <option
+            *ngFor="let app of appList"
+            value="{{ app.capApplicationID }}"
+          >
+            {{ app.dapApplicationName }}
+          </option>
+        </select> -->
+        <!-- <mat-form-field appearance="outline">
+          <mat-select
+            [(ngModel)]="selectApp"
+            placeholder="Seleccione Aplicación"
+          >
+            <mat-option
+              *ngFor="let app of appList"
+              value="{{ app.capApplicationID }}"
+            >
+              {{ app.dapApplicationName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+        <mat-form-field
+          appearance="outline"
+          style="margin-left: 1em; margin-top: 0.3em"
+        >
+          <mat-select
+            placeholder="Seleccione Aplicación"
+            [(ngModel)]="selectApp"
+            disableOptionCentering
+          >
+            <mat-option
+              *ngFor="let app of appList"
+              [value]="app.capApplicationID"
+            >
+              {{ app.dapApplicationName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <p class="fontclass-chica-subt">{{ body }}</p>
+      <textarea
+        maxlength="300"
+        class="ta-custom"
+        cols="75"
+        rows="12"
+        [(ngModel)]="comment"
+        [disabled]="!writeOnlyComment"
+      ></textarea>
+      <p style="color: rgba(0, 0, 0, 0.6); font-size: 11px">
+        {{ comment?.length }} / 300
+      </p>
+    </div>
+  </div>
+</mat-dialog-content>
+<!-- <mat-divider></mat-divider> -->
+<mat-dialog-actions align="end">
+  <mat-label
+    class="fontclass-chica-label-error-message"
+    *ngIf="isAppEraseFlag"
+    >{{ defineContanst.MSG_POPUP_APP_ERASE }}</mat-label
+  >
+  <div class="separator-button" *ngIf="writeOnlyComment">
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="callBack()"
+      class="btnFocus fontclass-chica-subt hp__buttons-save"
+    >
+      <!-- <mat-icon>check</mat-icon>  -->
+      <span>Aceptar</span>
+    </button>
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="onNoClick()"
+      class="fontclass-chica-subt hp__buttons-cancel"
+    >
+      Cancelar
+    </button>
+  </div>
+  <div class="separator-button" *ngIf="!writeOnlyComment">
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="callBack()"
+      class="btnFocus fontclass-chica-subt hp__buttons-save"
+    >
+      <!-- <mat-icon>check</mat-icon>  -->
+      <span>Aceptar</span>
+    </button>
+  </div>
+</mat-dialog-actions>

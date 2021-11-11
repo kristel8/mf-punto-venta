@@ -1,0 +1,84 @@
+@import "_colors";
+
+.popup {
+  padding: 20px 24px;
+  //INCIDENCIA EL2709
+  height: 100%;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    &__title {
+      color: #433e3f;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  .columns {
+    height: 408px;
+    overflow-y: hidden;
+    margin-top: 1em;
+    &:hover {
+      overflow-y: scroll;
+    }
+    &__item {
+      height: 40px;
+      width: 100%;
+      padding: 1em;
+      border: 1px solid #e3e2e2;
+      border-radius: 5px;
+      margin-bottom: 8px;
+
+      &-button {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .buttons {
+    justify-content: flex-end;
+    .btn-save {
+      background: $secondary-color;
+      color: white;
+    }
+  }
+}
+
+.mat-dialog-content {
+  margin: 0;
+  padding: 0;
+  max-height: 100% !important; //INCIDENCIA EL2709
+}
+
+
+
+.columns::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: none;
+}
+
+.columns::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.columns::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #bebebe;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::ng-deep {
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: $secondary-color !important;
+  }
+
+  .mat-checkbox-frame {
+    border-radius: 4px;
+  }
+}

@@ -1,0 +1,103 @@
+.card {
+  box-shadow: none;
+}
+
+.tablaCheck {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.tablaChec .mat-checkbox-layout {
+  margin-right: 20px;
+}
+
+@media (max-width: 1680px) {
+  .tablaCheck {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .tablaCheck {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.containercommission {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.fontTitle {
+
+  font-weight: normal;
+  font-size: 20px;
+  color: #433e3f;
+}
+
+select,
+input {
+  height: 30px;
+  font-size: 14px;
+}
+
+
+
+
+.mat-radio-ripple ~ .mat-ripple {
+  height: 20px;
+  width: 20px;
+}
+
+.overflow-table-container {
+  position: relative;
+  overflow: auto;
+}
+
+
+.checkbox {
+  display: flex;
+  column-gap: 10px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  &__item {
+    flex-grow: 2;
+    max-width: 135px;
+  }
+}
+
+.select {
+  display: flex;
+  column-gap: 10px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  &__item {
+    flex-grow: 6;
+    display: grid;
+    row-gap: 10px;
+  }
+}
+
+.dates {
+  display: grid;
+  row-gap: 10px;
+  column-gap: 10px;
+
+  &__input {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(50px, 100px));
+    column-gap: 10px;
+  }
+}
+
+
+.alarm {
+  display: grid;
+  row-gap: 10px;
+  column-gap: 10px;
+  &__checkbox {
+    display: flex;
+    column-gap: 30px;
+  }
+}

@@ -1,0 +1,906 @@
+<div class="hp-container">
+  <div class="header__bac">
+    <div class="header__bac-tree">
+      <label class="label-prev-chev">Configuración de punto de venta</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+      <label class="label-prev-chev">Comercio</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+
+      <label class="label-post-chev">Editar</label>
+    </div>
+
+    <label class="fontH">Editar Comercio</label>
+    <!--<div class="header__bac-actions">
+      <h2>Editar Comercio</h2>
+      <div class="blank-space"></div>
+    </div>-->
+  </div>
+
+  <!-- <div class="hp-header">
+    <h3 class="hp-title">Editar Comercio</h3>
+    <div class="hp-path">
+      <span class="material-icons">home</span>
+      <span class="material-icons">navigate_next</span>
+      Configuración de punto de venta
+      <span class="material-icons">navigate_next</span>
+      Comercio
+      <span class="material-icons">navigate_next</span>
+      Editar
+    </div>
+  </div>
+  <mat-divider></mat-divider> -->
+
+  <!-- <div class="hp-module-loader" *ngIf="isMerchantLoad; else elseBlock">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div> -->
+  <!-- <ng-template #elseBlock> -->
+  <form
+    class="form-horizontal"
+    autocomplete="off"
+    [formGroup]="fieldsContenido"
+    (ngSubmit)="guardar()"
+  >
+    <div class="text-right my-3">
+
+
+    <div class="row">
+      <div class="col">
+          <div class="row pl-3 mt-2">
+              <span class="material-icons back-to-list" [routerLink]="['/config-red/comercio']">arrow_back_ios</span>
+              <h3 class="fontH back-to-list" [routerLink]="['/config-red/comercio']">Atrás</h3>
+          </div>
+      </div>
+
+      <div class="col d-flex justify-content-end">
+          <button mat-button class="hp-button-save mr-2" type="submit" [disabled]="isValidAccessLevelModify || isMerchantSaveProccess"><span class="material-icons-outlined mr-1" >save</span>Guardar</button>
+          <button mat-button class="hp-button-delete"    type="button" (click)="popupDelete()" [disabled]="isValidAccessLevel"><span class="material-icons-outlined mr-1">delete</span>Eliminar</button>
+      </div>
+  </div>
+
+    </div>
+
+<div class="hp-group ">
+      <div class="hp-group-header">
+        <div class="hp-title">
+          <mat-icon>list_alt</mat-icon>
+          Información General
+        </div>
+      </div>
+      <div class="hp-group-body">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Código
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  readonly
+                  formControlName="cmrMerchantId"
+                  name="cmrMerchantId"
+                  maxlength="15"
+                  hp-validator="alphanumericV2"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Nombre
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  #inputName
+                  formControlName="dmrMerchantName"
+                  name="dmrMerchantName"
+                  maxlength="32"
+                  hp-validator="alphanumericV2"
+                />
+
+                <p class="hp-count">
+                  {{ fieldsContenido.value.dmrMerchantName?.length }} / 32
+                </p>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_NAME) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_NAME)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Número de Cuenta Local
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="nmrCuentaLocal"
+                  name="nmrCuentaLocal"
+                  maxlength="9"
+                  hp-validator="numeric"
+                />
+
+                <p class="hp-count">
+                  {{ fieldsContenido.value.nmrCuentaLocal?.length }} / 9
+                </p>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_LOCAL_ACCOUNT) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_LOCAL_ACCOUNT)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Estado
+              </label>
+              <div class="col-sm-9">
+                <select class="form-control" formControlName="cmrStatus">
+                  <option value="2">Deshabilitado</option>
+                  <option value="0">Habilitado</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Código jurídico / RUC
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="cmrRucCode"
+                  name="cmrRucCode"
+                  maxlength="16"
+                />
+
+                <p class="hp-count">
+                  {{ fieldsContenido.value.cmrRucCode?.length }} / 16
+                </p>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_RUC_CODE) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_RUC_CODE)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Dirección
+              </label>
+              <div class="col-sm-9">
+                <textarea
+                  class="form-control"
+                  type="text"
+                  formControlName="dmrAddress"
+                  maxlength="32"
+                  hp-validator="alphanumeric"
+                >
+                </textarea>
+                <p class="hp-count">
+                  {{ fieldsContenido.value.dmrAddress?.length }} / 32
+                </p>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_ADDRESS) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_ADDRESS)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Número de Afiliado
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="cmrMCC"
+                  name="cmrMCC"
+                  maxlength="8"
+                  hp-validator="numeric"
+                />
+
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_AFFILIATE_NUMBER) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_AFFILIATE_NUMBER)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Número de Cuenta Extranjera
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="nmrCuentaExtranjera"
+                  name="nmrCuentaExtranjera"
+                  maxlength="9"
+                  hp-validator="numeric"
+                />
+
+                <p class="hp-count">
+                  {{ fieldsContenido.value.nmrCuentaExtranjera?.length }} / 9
+                </p>
+
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_FOREING_ACCOUNT) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_FOREING_ACCOUNT)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="hp-group ">
+      <div class="hp-group-header">
+        <div class="hp-title">
+          <mat-icon>list_alt</mat-icon>
+          Límites de Piso
+        </div>
+      </div>
+      <div class="hp-group-body">
+        <p><b>Moneda local (c)</b></p>
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Límite de Piso
+              </label>
+              <div class="col-sm-9">
+                <!-- <input
+                  class="form-control"
+                  type="text"
+                  maxlength="12"
+                  formControlName="cmrLimitAmount"
+                  name="cmrLimitAmount"
+                  hp-validator="alphanumericV2"
+                  [disabled]="saldoinput"
+                /> -->
+                <input
+                  class="form-control"
+                  type="text"
+                  maxlength="12"
+                  formControlName="cmrLimitAmount"
+                  name="cmrLimitAmount"
+                  hp-validator="alphanumericV2"
+                  [disabled]="true"
+
+                />
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_LIMIT_LOCAL) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_LIMIT_LOCAL)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Saldo Actual
+              </label>
+              <div class="col-sm-9">
+
+                <!-- <input
+                  class="form-control"
+                  type="text"
+                  maxlength="12"
+                  formControlName="cmrSaldoAmount"
+                  name="cmrSaldoAmount"
+                  hp-validator="alphanumericV2"
+                  [disabled]="saldoinput"
+                /> -->
+                <input
+                  class="form-control"
+                  type="text"
+                  maxlength="12"
+                  formControlName="cmrSaldoAmount"
+                  name="cmrSaldoAmount"
+                  hp-validator="alphanumericV2"
+                  [disabled]="true"
+                />
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_LIMIT_LOCAL) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_LIMIT_LOCAL)"
+                />
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><b>Moneda Extranjera (US$)</b></p>
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Límite de Piso
+              </label>
+              <div class="col-sm-9">
+                <!-- <input
+                  class="form-control"
+                  type="text"
+                  maxlength="12"
+                  hp-validator="alphanumericV2"
+                  formControlName="cmrLimitAmountDollar"
+                  name="cmrLimitAmountDollar"
+                  [disabled]="saldoinput"
+                /> -->
+                <input
+                  class="form-control"
+                  type="text"
+                  maxlength="12"
+                  hp-validator="alphanumericV2"
+                  formControlName="cmrLimitAmountDollar"
+                  name="cmrLimitAmountDollar"
+                  [disabled]="true"
+                />
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_LIMIT_EXT) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_LIMIT_EXT)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Saldo Actual
+              </label>
+              <div class="col-sm-9">
+
+                <!-- <input
+                  class="form-control"
+                  type="text"
+                  maxlength="12"
+                  formControlName="cmrSaldoAmountDollar"
+                  name="cmrSaldoAmountDollar"
+                  hp-validator="alphanumericV2"
+                  [disabled]="saldoinput"
+                /> -->
+
+                <input
+                  class="form-control"
+                  type="text"
+                  maxlength="12"
+                  formControlName="cmrSaldoAmountDollar"
+                  name="cmrSaldoAmountDollar"
+                  hp-validator="alphanumericV2"
+                  [disabled]="true"
+                />
+
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_LIMIT_LOCAL) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_LIMIT_LOCAL)"
+                />
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="hp-group ">
+      <div class="hp-group-header">
+        <div class="hp-title">
+          <mat-icon>list_alt</mat-icon>
+          Perfiles
+        </div>
+      </div>
+      <div class="hp-group-body">
+        <div class="row">
+          <div class="col-sm-12 col-lg-3">
+            <div class="form-group row">
+              <label class="col-sm-5 text-right control-label col-form-label">
+                Perfil de Comercio</label
+              >
+              <div class="col-sm-7">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-select
+                    formControlName="cmrProfileId"
+                    #filterperfilcomercio
+                    (selectionChange)="changeMerchProfile()"
+                  >
+                    <mat-option>
+                      <ngx-mat-select-search
+                        [formControl]="matSelectSearchPerfilComercioCtrl"
+                        placeholderLabel="Seleccione ..."
+                      ></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option
+                      *ngFor="
+                        let merchantProfile of filteredFiltroPerfilComercio
+                          | async
+                      "
+                      [value]="merchantProfile"
+                    >
+                      {{ merchantProfile.cmpprofileId }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_MERCHANT_PROFILE) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_MERCHANT_PROFILE)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="form-group row">
+              <label class="col-sm-5 text-right control-label col-form-label">
+                Cadena de Comercio</label
+              >
+              <div class="col-sm-7">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-select
+                    formControlName="cmrMerchantChain"
+                    #filtermerchant
+                    (selectionChange)="changeOfMerchantChain($event.value)"
+                  >
+                    <mat-option>
+                      <ngx-mat-select-search
+                        [formControl]="matSelectSearchCadenaComercioCtrl"
+                        placeholderLabel="Seleccione ..."
+                      ></ngx-mat-select-search>
+                    </mat-option>
+
+                    <mat-option
+                      *ngFor="let merchants of filteredFiltro | async"
+                      [value]="merchants"
+                    >
+                      {{ merchants.dmcChainName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_TRADE_CHAIN) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_TRADE_CHAIN)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="form-group row">
+              <label class="col-sm-5 text-right control-label col-form-label">
+                Plan de Descarga</label
+              >
+              <div class="col-sm-7">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-select
+                    formControlName="cmrDownloadProfile"
+                    #filterperfildownload
+                  >
+                    <mat-option>
+                      <ngx-mat-select-search
+                        [formControl]="matSelectSearchPerfilDownloadCtrl"
+                        placeholderLabel="Seleccione ..."
+                      ></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option
+                      *ngFor="
+                        let downloadProfile of filteredFiltroPerfildownload
+                          | async
+                      "
+                      [value]="downloadProfile"
+                    >
+                      {{ downloadProfile.ddpprofilename }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_DOWNLOAD_PROFILE) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_DOWNLOAD_PROFILE)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="form-group row">
+              <label class="col-sm-5 text-right control-label col-form-label">
+                Perfil de Comisión</label
+              >
+              <div class="col-sm-7">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-select formControlName="cmrComision" #filtercomision>
+                    <mat-option>
+                      <ngx-mat-select-search
+                        [formControl]="matSelectSearchComisionCtrl"
+                        placeholderLabel="Seleccione ..."
+                      ></ngx-mat-select-search>
+                    </mat-option>
+
+                    <mat-option
+                      *ngFor="let comisiones of filteredFiltroComision | async"
+                      [value]="comisiones"
+                    >
+                      {{ comisiones.cconame }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_COMISION_PROFILE) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_COMISION_PROFILE)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="hp-group ">
+      <div class="hp-group-header">
+        <div class="hp-title">
+          <mat-icon>list_alt</mat-icon>
+          Ubicación
+        </div>
+      </div>
+      <div class="hp-group-body">
+        <div class="row">
+          <div class="col-sm-12 col-lg-3">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                País</label
+              >
+              <div class="col-sm-9">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-select
+                    [formControl]="nivelCeroCtrl"
+                    #singleSelectNCERO
+                    (selectionChange)="checkNivel1($event.value)"
+                  >
+                    <mat-option>
+                      <ngx-mat-select-search
+                        [formControl]="nivelCeroFilterCtrl"
+                        placeholderLabel="Seleccione ..."
+                      ></ngx-mat-select-search>
+                    </mat-option>
+
+                    <mat-option
+                      *ngFor="let nivel0 of filteredNivelCero | async"
+                      [value]="nivel0"
+                    >
+                      {{ nivel0.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_UBICACION_PAIS) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_UBICACION_PAIS)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Nivel 1</label
+              >
+              <div class="col-sm-9">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-select
+                    [formControl]="nivelOneCtrl"
+                    #singleSelectNONE
+                    (selectionChange)="checkNivel2($event.value)"
+                  >
+                    <mat-option>
+                      <ngx-mat-select-search
+                        [formControl]="nivelOneFilterCtrl"
+                        placeholderLabel="Seleccione ..."
+                      ></ngx-mat-select-search>
+                    </mat-option>
+
+                    <mat-option
+                      *ngFor="let nivel1 of filteredNivelOne | async"
+                      [value]="nivel1"
+                    >
+                      {{ nivel1.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_UBICACION_NIVEL1) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_UBICACION_NIVEL1)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Nivel 2</label
+              >
+              <div class="col-sm-9">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-select
+                    [formControl]="nivelTwoCtrl"
+                    #singleSelectNTWO
+                    (selectionChange)="checkNivel3($event.value)"
+                    [disabled]="showLevel2"
+                  >
+                    <mat-option>
+                      <ngx-mat-select-search
+                        [formControl]="nivelTwoFilterCtrl"
+                        placeholderLabel="Seleccione ..."
+                      ></ngx-mat-select-search>
+                    </mat-option>
+
+                    <mat-option
+                      *ngFor="let nivel2 of filteredNivelTwo | async"
+                      [value]="nivel2"
+                    >
+                      {{ nivel2.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_UBICACION_NIVEL2) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_UBICACION_NIVEL2)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Nivel 3</label
+              >
+              <div class="col-sm-9">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-select
+                    [formControl]="nivelThreeCtrl"
+                    #singleSelectNTHREE
+                    [disabled]="showLevel3"
+                  >
+                    <mat-option>
+                      <ngx-mat-select-search
+                        [formControl]="nivelThreeFilterCtrl"
+                        placeholderLabel="Seleccione ..."
+                      ></ngx-mat-select-search>
+                    </mat-option>
+
+                    <mat-option
+                      *ngFor="let nivel3 of filteredNivelThree | async"
+                      [value]="nivel3"
+                    >
+                      {{ nivel3.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_UBICACION_NIVEL3) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_UBICACION_NIVEL3)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="hp-group ">
+      <div class="hp-group-header">
+        <div class="hp-title">
+          <mat-icon>list_alt</mat-icon>
+          Datos de Contacto
+        </div>
+      </div>
+      <div class="hp-group-body">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Nombre
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="dmrContactName"
+                  name="dmrContactName"
+                  maxlength="32"
+                  hp-validator="alphabetic"
+                />
+                <p class="hp-count">
+                  {{ fieldsContenido.value.dmrContactName?.length }} / 32
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Operador Telefónico
+              </label>
+              <div class="col-sm-9">
+                <select
+                  class="form-control"
+                  formControlName="cmrTelephoneOperatorCode"
+                >
+                  <option
+                    *ngFor="let operadorTelefonico of operadorTelefonico"
+                    [value]="operadorTelefonico.valueCode"
+                  >
+                    {{ operadorTelefonico.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Número de Teléfono
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="dmrPhone"
+                  name="dmrPhone"
+                  maxlength="15"
+                  hp-validator="numeric"
+                />
+                <p class="hp-count">
+                  {{ fieldsContenido.value.dmrPhone?.length }} / 15
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 text-right control-label col-form-label">
+                Fecha de firma del Contrato:
+              </label>
+              <div class="col-sm-9">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <input
+                    matInput
+                    [matDatepicker]="picker1"
+                    #fechaTest
+                    type="text"
+                    formControlName="fmrContrSignDate"
+                    name="fmrContrSignDate"
+                    autocomplete="off"
+                    readonly
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker1"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label
+                for="cmrEmail"
+                class="col-sm-3 text-right control-label col-form-label"
+              >
+                Notificación de correo
+              </label>
+              <div class="col-sm-9">
+                <input
+                  class="form-control"
+                  hp-validator="email"
+                  id="cmrEmail"
+                  formControlName="cmrEmail"
+                  name="cmrEmail"
+                  maxlength="32"
+                />
+                <p class="hp-count">
+                  {{ fieldsContenido.value.cmrEmail?.length }} / 32
+                </p>
+                <img
+                  class="hp-icon-error"
+                  src="assets/images/erroricon.png"
+                  *ngIf="getMessage(MSG_EMAIL_FORMAT) != MSG_NONE"
+                  [matTooltip]="getMessage(MSG_EMAIL_FORMAT)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="text-center col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <div class="col-7">
+                <mat-checkbox
+                  class="hp-checkbox-fix"
+                  [checked]="
+                    fieldsContenido.controls['cmrAcceptCompanyPayment'].value ==
+                    0
+                      ? true
+                      : false
+                  "
+                  (change)="onChangeAcceptPayment($event)"
+                >
+                Aceptar pago de empresas
+              </mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </form>
+  <!--   </ng-template> -->
+
+  <div class="hp-module-loader" *ngIf="isMerchantSaveProccess">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+</div>

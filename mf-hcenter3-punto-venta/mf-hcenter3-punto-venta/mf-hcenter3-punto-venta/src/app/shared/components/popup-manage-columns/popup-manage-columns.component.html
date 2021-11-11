@@ -1,0 +1,31 @@
+<div class="popup">
+  <div class="header">
+    <h2 class="header__title">Administrar columnas</h2>
+    <mat-icon [mat-dialog-close]="null">close</mat-icon>
+  </div>
+  <div mat-dialog-content>
+    <div class="columns" cdkDropList (cdkDropListDropped)="drop($event)" #lista>
+      <div *ngFor="let column of displayedColumns" class="columns__item" cdkDrag [cdkDragDisabled]="false">
+        <div class="columns__item-button">
+          <mat-checkbox
+            [disabled]="column.blockAdminCol"
+            [checked]="verificarCheckBoxShowColumn(column.display)"
+            (change)="changeShowColumn(column, $event.checked)"
+            >{{
+              column == "Seleccionar"
+                ? ocultar("column" + column.display)
+                : column.display
+            }}</mat-checkbox
+          >
+          <mat-icon *ngIf="verificarCheckBoxShowColumn(column.display)" cdkDragHandle> drag_handle</mat-icon>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions class="buttons">
+      <button mat-button [mat-dialog-close]="null">Cancelar</button>
+      <button mat-button [mat-dialog-close]="showColumns" class="btn-save">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>

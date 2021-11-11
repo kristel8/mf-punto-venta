@@ -1,0 +1,293 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-table {
+  max-width: 50px;
+}
+
+.iconProp {
+  width: 15px;
+  font-size: 9px;
+}
+
+.labelProp {
+  color: rgba(66, 66, 66);
+}
+
+.align {
+  margin-left: 1rem;
+}
+
+.cardProp {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  height: 86%;
+}
+
+.tableProp {
+  width: 100%;
+}
+
+.prop:hover {
+  background: #777;
+}
+
+.mat-row:hover {
+  background: #efefef;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.iconPropDialog {
+  width: 28px;
+}
+
+.iconPropSuccess {
+  width: 80px;
+}
+
+.btnMaintenance {
+  background: rgb(51, 51, 51);
+}
+
+.iconMaintenance {
+  width: 28px;
+  vertical-align: top;
+}
+
+.row {
+  cursor: pointer;
+}
+
+//2do tab
+
+.example-container {
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 85%;
+}
+
+.message-box.success {
+  background: #4caf50;
+  border-left-color: #2e7d32;
+}
+
+.message-box.error {
+  background: #ef5350;
+  border-left-color: #b71c1c;
+}
+
+.message-box.warning {
+  background: #ffecb3;
+  border-left-color: #ffc107;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.message-box.info {
+  background: #b3e5fc;
+  border-left-color: #03a9f4;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.message-box {
+  padding: 16px;
+  background: #607d8b;
+  border-left: 6px solid #37474f;
+  color: #fff;
+}
+
+.table-role {
+  width: 100%;
+}
+
+.fontclass-chica-combo {
+
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-label {
+  font-size: 13px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-title {
+
+  font-size: 20px !important;
+  font-style: bold;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-subt {
+
+  font-size: 15px !important;
+  font-style: bold;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.btnFocus {
+  background: #505050;
+  color: #ffffff;
+}
+
+.matPass {
+  width: 450px !important;
+}
+
+.example-form-field {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.tam {
+  height: 150px !important;
+}
+
+.grid-tile {
+  height: 100px !important;
+}
+
+.propImg {
+  width: 28px;
+  margin-right: 2px;
+}
+
+.divPersonal {
+  display: table;
+  width: 25%;
+}
+
+//nuevo design
+
+.divTable {
+  display: table;
+  width: 100%;
+}
+.divTableRow {
+  display: table-row;
+}
+.divTableHeading {
+  background-color: #eee;
+  display: table-header-group;
+}
+.divTableCell,
+.divTableHead {
+  //border: 1px solid #999999;
+  display: table-cell;
+  padding: 3px 10px;
+}
+.divTableHeading {
+  background-color: #eee;
+  display: table-header-group;
+  font-weight: bold;
+}
+.divTableFoot {
+  background-color: #eee;
+  display: table-footer-group;
+  font-weight: bold;
+}
+.divTableBody {
+  display: table-row-group;
+}
+
+.fontclass-chica-label {
+  font-size: 10px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-combo-bold {
+
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+}
+
+.error-icon {
+  height: 15px;
+  width: 15px;
+  margin-left: 10px;
+}
+
+.error-icon-father {
+  height: 15px;
+  width: 15px;
+  float: right;
+  margin-top: 7px;
+}
+
+.error-icon-father-left {
+  height: 15px;
+  width: 15px;
+}
+
+
+//card
+.card {
+  box-shadow: none;
+}
+
+.card-container-right {
+  display: inline;
+  float: right;
+  min-width: 100px;
+}
+
+.card-prop {
+  height: 90vh;
+}
+
+.loading-main-submit {
+  width: 15px;
+  height: 15px;
+  margin-left: 70%;
+  margin-top: 12%;
+}
+
+.containercommission {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+//prueba
+
+.fontTitle {
+
+  font-weight: normal;
+  font-size: 20px;
+  color: #433e3f;
+}
+
+select,
+input {
+  height: 30px;
+  font-size: 14px;
+}
+
+
+
+
+.mat-radio-ripple ~ .mat-ripple {
+  height: 20px;
+  width: 20px;
+}
+
+.overflow-table-container {
+  position: relative;
+  overflow: auto;
+}

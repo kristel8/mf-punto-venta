@@ -1,0 +1,380 @@
+<div class="component data component-card">
+  <div class="header">
+    <div class="header__actions" *ngIf="dataSource?.filteredData?.length > 0">
+      <div
+        class="form-field clickable"
+        [matMenuTriggerFor]="menuActions"
+        #mActions="matMenuTrigger"
+        *ngIf="showActions"
+        >
+        <!-- *ngIf="isMasterTable && showActions" -->
+        <span>Acciones</span>
+        <mat-icon class="form-field__icon">{{
+          mActions.menuOpen ? "keyboard_arrow_up" : "keyboard_arrow_down"
+        }}</mat-icon>
+      </div>
+      <mat-menu #menuActions="matMenu">
+        <button mat-menu-item (click)="openManageColumns()">
+          Administrar columnas
+        </button>
+        <!-- <button mat-menu-item>Exportar a Excel</button> -->
+        <button
+          mat-menu-item
+          (click)="toggleEliminationMode()"
+          *ngIf="deleteMany"
+        >
+          {{ eliminationMode ? "Cancelar eliminar" : "Eliminar masivamente" }}
+        </button>
+
+        <button mat-menu-item  (click)="exportExcel2()">
+          Exportar Excel
+        </button>
+
+        <button mat-menu-item *ngIf="export" (click)="exportData()">
+          Exportar
+        </button>
+      </mat-menu>
+
+      <mat-divider
+        *ngIf="isMasterTable && showActions"
+        [vertical]="true"
+      ></mat-divider>
+      <div style="display: flex">
+        <span class="pages">Filas por página</span>
+        <div
+          class="form-field clickable"
+          style="width: 74px; margin-left: 0.3em"
+          [matMenuTriggerFor]="menuPages"
+          #mPages="matMenuTrigger"
+        >
+          <span>{{ pageSize }}</span>
+          <mat-icon class="form-field__icon">{{
+            mPages.menuOpen ? "keyboard_arrow_up" : "keyboard_arrow_down"
+          }}</mat-icon>
+        </div>
+
+        <mat-menu #menuPages="matMenu">
+          <button
+            mat-menu-item
+            (click)="paginator._changePageSize(20); pageSize = 20"
+          >
+            20
+          </button>
+          <button
+            mat-menu-item
+            (click)="paginator._changePageSize(50); pageSize = 50"
+          >
+            50
+          </button>
+          <button
+            mat-menu-item
+            (click)="paginator._changePageSize(100); pageSize = 100"
+          >
+            100
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+
+  <div
+    (onload)="setDataSourceAttributes()"
+    class="example-container"
+    [ngStyle]="{
+      height: typeHeight == 'default' ? myInnerHeight + 'px' : 'calc(100vh - 22em)'
+    }"
+    *ngIf="show"
+  >
+    <div *ngIf="!hidden">
+      <mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="mat-elevation-z8 table fontclass-chica-combo hiper__table"
+        >
+        <mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+          class="header-row"
+        >
+        </mat-header-row>
+
+        <ng-container
+          *ngFor="
+            let column of columnsaux;
+            let index = index;
+            trackBy: utils.trackByIndex
+          "
+          [cdkColumnDef]="column.columnDef"
+          [sticky]="utils.isSticky(column.columnDef, 'checkbox')"
+          class="container"
+        >
+
+        <mat-header-cell
+          *cdkHeaderCellDef
+          class="header-cell {{
+            getStyleClassHeader(column.header)
+          }} table__header report"
+        >
+          <div
+            *ngIf="!utils.isSticky(column.header, 'checkbox')"
+            class="sort-header"
+            (contextmenu)="onRightClick($event, -1, 'all')"
+          >
+            <span
+              mat-sort-header
+              class="column__title"
+              [ngClass]="
+                dataSource.filteredData.length === 0
+                  ? 'column__title-empty-data'
+                  : null
+              "
+              >{{ column.header.trim() }}</span
+            >
+            <div
+              class="input__filter"
+              [ngClass]="
+                dataSource.filteredData.length === 0
+                  ? 'input__filter-empty-data'
+                  : null
+              "
+              *ngIf="showFilter(column.filterActive)"
+            >
+              <mat-icon>search</mat-icon>
+              <input
+                type="text"
+                [formControl]="getFormControl(column.header)"
+                (click)="asigKeySearch(column.header)"
+                hp-validator="alphanumeric-table"
+              />
+            </div>
+          </div>
+          <mat-checkbox
+            [style]="setCheckBoxColor"
+            class="mat-column-checkbox-width"
+            *ngIf="utils.isSticky(column.header, 'checkbox')"
+            (change)="$event ? masterToggle() : null; pickDataCheck()"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [disableRipple]="!disableCheck"
+            [disabled]="!permiteAllSelect"
+            [aria-label]="checkboxLabel()"
+            [ngClass]="
+              !eliminationMode && isMasterTable ? 'checkRow-hidden' : null
+            "
+          >
+          </mat-checkbox>
+        </mat-header-cell>
+
+
+          <!-- Rows con los datos de la tabla -->
+          <!-- <mat-cell
+            *cdkCellDef="let row"
+            [ngStyle]=" { flex: '0 0 1' } "
+            class="cell {{
+              getStyleClass(
+                column.header,
+                column.filterActive,
+                column.cell(row)
+              )
+            }} {{ getStyleClassHeader(column.header) }}"
+
+          > -->
+          <mat-cell
+            *cdkCellDef="let row"
+            [ngStyle]="
+              column.cell(row)?.length > 20
+                ? { flex: '0 0 1' }
+                : null
+            "
+            class="cell {{
+              getStyleClass(
+                column.header,
+                column.filterActive,
+                column.cell(row)
+              )
+            }} {{ getStyleClassHeader(column.header) }}"
+
+          >
+            <mat-checkbox
+              [style]="setCheckBoxColor"
+              class="mat-column-checkbox-width"
+              *ngIf="utils.isSticky(column.header, 'checkbox')"
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selCheckBoxUnit(row) : null; pickDataCheck()"
+              [disableRipple]="!disableCheck"
+              [disabled]="!disableCheck"
+              [checked]="selection.isSelected(row)"
+              [aria-label]="checkboxLabel(row)"
+              #checkRow
+              [ngClass]="
+                !eliminationMode && isMasterTable ? 'checkRow-hidden' : ''
+              "
+            >
+            </mat-checkbox>
+
+            <span *ngIf="!utils.isSticky(column.header, 'checkbox')" class="span-cell">
+              <div *ngIf="!column.linkModal">{{ column.cell(row)}}</div>
+              <a href="javascript:void(0);" *ngIf="column.linkModal" (click)="openModalDetail(row)">{{ column.cell(row)}}</a>
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-row
+          style="cursor: pointer"
+          *matRowDef="
+            let row;
+            columns: displayedColumns
+              | paginate
+                : {
+                    itemsPerPage: undefined,
+                    currentPage: undefined,
+                    totalItems: dataSource.data.length
+                  }
+          "
+          (click)="clickOnRow(row[selectIdValue], row)"
+          [ngClass]="
+            [
+            selection.isSelected(row) && isEliminationMode ? 'row-selected':'',
+            row.style !== undefined ? 'body-row ' + row.style : 'body-row']
+          "
+        >
+        </mat-row>
+
+        <ng-container matColumnDef="action" *ngIf="isMasterTable" sticky style="position: sticky; width: 100%;">
+          <mat-header-cell *cdkHeaderCellDef class="actions" style="height: 90px !important; background: white !important;">
+            <span
+              class="column__title column__title-actions"
+              [ngClass]="
+                dataSource.filteredData.length === 0
+                  ? 'column__title-empty-data'
+                  : null
+              "
+              style="border-style: none;"
+              >Acción</span
+            >
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let element" class="actions">
+            <div class="actions__buttons" style="border-style: none;">
+              <img
+                class="
+                  mat-icon
+                  notranslate
+                  material-icons
+                  mat-icon-no-color
+                  actions__buttons-edit
+                "
+                src="assets/images/icons/editar.svg"
+                alt=""
+                (click)="
+                  openDialogEditar(element[selectIdValue], element);
+                "
+              />
+
+              <img
+                class="
+                  mat-icon
+                  notranslate
+                  material-icons
+                  mat-icon-no-color
+                "
+                [ngClass]="{'actions__buttons-delete': !disableButtonDelete, 'default-cursor-disable': disableButtonDelete}"
+                *ngIf="!isModifyOnlyTable"
+                src="assets/images/icons/eliminar.svg"
+                alt=""
+                (click)="$event.stopPropagation(); requestDeleteData(element)"
+              />
+            </div>
+          </mat-cell>
+        </ng-container>
+
+      </mat-table>
+
+      <div class="empty-message" *ngIf="dataSource.filteredData.length === 0">
+        No existen registros
+      </div>
+    </div>
+  </div>
+
+  <div
+    style="visibility: hidden; position: fixed"
+    [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y"
+    [matMenuTriggerFor]="contextMenu"
+  ></div>
+
+  <mat-menu #contextMenu="matMenu" #contextMenu2="matMenu">
+    <ng-template matMenuContent>
+      <div
+        *ngFor="
+          let column of idColumnsWithDisplayColumns.displayedColumnsValues
+        "
+        id="column{{ column.display }}"
+      >
+        <!--div (click)="$event.stopPropagation()"--><!--agregar stopPropagation al div, evita que se cierre el menu al selecionar una opcion-->
+        <div>
+          <button mat-menu-item (click)="onContextMenuAction()">
+            <mat-checkbox
+              [style]="setCheckBoxColor"
+              [checked]="verificarCheckBoxShowColumn(column.display)"
+              (change)="changeShowColumn(column, $event.checked)"
+              >{{
+                column == "Seleccionar"
+                  ? ocultar("column" + column.display)
+                  : column.display
+              }}</mat-checkbox
+            >
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </mat-menu>
+</div>
+
+<div class="paginator" *ngIf="havePaginator">
+  <mat-paginator
+    class="fontclass-chica"
+    style="display: none"
+    [pageSizeOptions]="arrayOfTable"
+    showFirstLastButtons
+    [length]="paginator?.length"
+    [pageSize]="pageSize"
+    (page)="pageEvent = $event"
+    *ngIf="!hidden"
+  ></mat-paginator>
+
+  <div class="container-paginator">
+    <div class="paginator__count">
+      <span> {{ paginator?.length | number }} elemento(s) en total</span>
+    </div>
+
+    <div class="paginator__actions" *ngIf="dataSource?.filteredData?.length > 0">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+      <span
+        class="clickable paginator__actions-prev"
+        (click)="paginator?.previousPage()"
+        >Anterior</span
+      >
+      <span
+        >{{ paginator?.pageIndex + 1 }} de
+        {{ paginator?.getNumberOfPages() | number }}</span
+      >
+      <span
+        class="clickable paginator__actions-next"
+        (click)="paginator?.nextPage()"
+        >Siguiente</span
+      >
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </div>
+  </div>
+
+</div>
+
+<div class="paginator" [style.display]="'none'" *ngIf="!havePaginator">
+  <mat-paginator
+    class="fontclass-chica"
+    [style.display]="'none'"
+    [pageSizeOptions]="arrayOfTable"
+    showFirstLastButtons
+    *ngIf="!hidden"
+  ></mat-paginator>
+</div>

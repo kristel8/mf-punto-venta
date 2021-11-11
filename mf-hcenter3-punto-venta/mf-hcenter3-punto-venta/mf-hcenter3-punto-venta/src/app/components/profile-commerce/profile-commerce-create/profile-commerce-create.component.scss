@@ -1,0 +1,439 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-table {
+  max-width: 50px;
+}
+
+.iconProp {
+  width: 15px;
+  font-size: 9px;
+}
+
+.labelProp {
+  color: rgba(66, 66, 66);
+}
+
+.align {
+  margin-left: 1rem;
+}
+
+.cardProp {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  height: 86%;
+}
+
+.tableProp {
+  width: 100%;
+}
+
+.prop:hover {
+  background: #777;
+}
+
+.mat-row:hover {
+  background: #efefef;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.iconPropDialog {
+  width: 28px;
+}
+
+.iconPropSuccess {
+  width: 80px;
+}
+
+.btnMaintenance {
+  background: rgb(51, 51, 51);
+}
+
+.iconMaintenance {
+  width: 28px;
+  vertical-align: top;
+}
+
+.row {
+  cursor: pointer;
+}
+
+//2do tab
+
+.example-container {
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 85%;
+}
+
+.message-box.success {
+  background: #4caf50;
+  border-left-color: #2e7d32;
+}
+
+.message-box.error {
+  background: #ef5350;
+  border-left-color: #b71c1c;
+}
+
+.message-box.warning {
+  background: #ffecb3;
+  border-left-color: #ffc107;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.message-box.info {
+  background: #b3e5fc;
+  border-left-color: #03a9f4;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.message-box {
+  padding: 16px;
+  background: #607d8b;
+  border-left: 6px solid #37474f;
+  color: #fff;
+}
+
+.table-role {
+  width: 100%;
+}
+
+.fontclass-chica-combo {
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-title {
+  font-size: 20px !important;
+  font-style: bold;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-subt {
+  font-size: 15px !important;
+  font-style: bold;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.btnFocus {
+  background: #505050;
+  color: #ffffff;
+  margin-right: 0.25rem;
+}
+/*
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--checkboxcolor) !important;
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--checkboxcolor) !important;
+} */
+
+.matPass {
+  width: 450px !important;
+}
+
+//reconstruccion, nuevo estilo crear usuario
+
+.divTable {
+  display: table;
+  width: 100%;
+}
+
+.divTableRow {
+  display: table-row;
+}
+
+.divTableHeading {
+  background-color: #eee;
+  display: table-header-group;
+}
+
+.divTableCell,
+.divTableHead {
+  //border: 1px solid #999999;
+  display: table-cell;
+  padding: 3px 10px;
+}
+
+.divTableHeading {
+  background-color: #eee;
+  display: table-header-group;
+  font-weight: bold;
+}
+
+.divTableFoot {
+  background-color: #eee;
+  display: table-footer-group;
+  font-weight: bold;
+}
+
+.divTableBody {
+  display: table-row-group;
+}
+
+//field design
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+  top: -1.5em;
+}
+
+// ::ng-deep .mat-form-field-wrapper {
+//   padding-bottom: 0px;
+// }
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  transform: translateY(-1.1em) scale(0.75);
+  width: 133.33333%;
+}
+
+/*fin desing field*/
+
+td {
+  height: 5px !important;
+}
+
+.card-container-right {
+  display: inline;
+  float: right;
+  min-width: 100px;
+}
+
+.card-container-left {
+  display: inline;
+  float: left;
+}
+
+.mat-icon {
+  font-size: 20px;
+}
+
+.fontclass-chica-label {
+  font-size: 10px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-combo-bold {
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+}
+
+.error-icon {
+  height: 15px;
+  width: 15px;
+  margin-left: 10px;
+}
+
+.error-icon-father {
+  height: 15px;
+  width: 15px;
+  float: right;
+  margin-top: 7px;
+}
+
+.error-icon-father-left {
+  height: 15px;
+  width: 15px;
+  float: left;
+  margin-top: 7px;
+}
+
+.name-profile-box {
+  float: left;
+}
+
+.app-content-box {
+  float: right;
+  /*padding-left: 1%;*/
+  padding-right: 10%;
+}
+
+.select-app-box {
+  float: left;
+}
+
+.app-box {
+  float: right;
+  padding-left: 20px;
+  width: 500px;
+}
+
+.app-box-apl {
+  float: left;
+  padding-left: 5%;
+}
+
+.mat-card {
+  /*height: calc(100% - 85px);*/
+}
+
+.card {
+  box-shadow: none;
+}
+
+.heigth-card {
+  height: 315px;
+}
+
+.width-table {
+  width: 60%;
+  float: left;
+}
+
+.width-table-2 {
+  width: 35%;
+  float: right;
+  /*padding-left: 10px;*/
+}
+
+.inputWidth {
+  width: 110px !important;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  transform: translateY(-1.1em) scale(0.75);
+  width: 133.33333%;
+}
+
+.loading-main-submit {
+  width: 15px;
+  height: 15px;
+  margin-left: 70%;
+  margin-top: 12%;
+}
+
+.container-text-app {
+  height: 22px;
+  width: 100px;
+  float: left;
+}
+
+.container-icon-message {
+  height: 22px;
+  width: 30px;
+  float: left;
+}
+::ng-deep .mat-form-field-subscript-wrapper {
+  font-size: 10px;
+}
+
+.tablaCheck {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.tablaChec .mat-checkbox-layout {
+  margin-right: 20px;
+}
+
+@media (max-width: 1680px) {
+  .tablaCheck {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .tablaCheck {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.containercommission {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+//prueba
+
+.fontTitle {
+  font-weight: normal;
+  font-size: 20px;
+  color: #433e3f;
+}
+
+select,
+input {
+  height: 30px;
+  font-size: 14px;
+}
+
+.mat-radio-ripple ~ .mat-ripple {
+  height: 20px;
+  width: 20px;
+}
+
+.overflow-table-container {
+  position: relative;
+  overflow: auto;
+}
+
+.checkbox {
+  display: flex;
+  column-gap: 10px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  &__item {
+    min-width: 135px;
+  }
+}
+
+.select {
+  display: flex;
+  column-gap: 10px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  &__item {
+    flex-grow: 6;
+    display: grid;
+    row-gap: 10px;
+  }
+}
+
+.dates {
+  display: grid;
+  row-gap: 10px;
+  column-gap: 10px;
+
+  &__input {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(50px, 100px));
+    column-gap: 10px;
+  }
+}
+
+
+.alarm {
+  display: grid;
+  row-gap: 10px;
+  column-gap: 10px;
+  &__checkbox {
+    display: flex;
+    column-gap: 30px;
+  }
+}

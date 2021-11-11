@@ -1,0 +1,488 @@
+<div class="hp-container">
+
+  <div class="header__bac">
+    <div class="header__bac-tree">
+      <label class="label-prev-chev">Configuración de punto de venta</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+      <label class="label-prev-chev">Terminales</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+
+      <label class="label-post-chev">Nuevo</label>
+    </div>
+    <label class="fontH">Nuevo Terminal</label>
+    <!--<div class="header__bac-actions">
+      <h2>Nuevo Terminal</h2>
+      <div class="blank-space"></div>
+    </div>-->
+  </div>
+
+  <!-- <div class="hp-header">
+    <h3 class="hp-title">Nuevo Terminal</h3>
+    <div class="hp-path">
+      <span class="material-icons">home</span>
+      <span class="material-icons">navigate_next</span>
+      Configuración de punto de venta
+      <span class="material-icons">navigate_next</span>
+      Terminales
+      <span class="material-icons">navigate_next</span>
+      Nuevo
+    </div>
+  </div>
+  <mat-divider></mat-divider> -->
+
+  <div class="hp-module-loader" *ngIf="isLoadPantalla; else elseBlock">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+  <ng-template #elseBlock>
+    <form
+      class="form-horizontal"
+      autocomplete="off"
+      [formGroup]="fieldsContenido"
+      (ngSubmit)="guardar()"
+    >
+      <div class="text-right my-3">
+        <div class="row">
+          <div class="col">
+              <div class="row pl-3 mt-2">
+                  <span class="material-icons back-to-list" [routerLink]="['/config-red/terminal']">arrow_back_ios</span>
+                  <h3 class="fontH back-to-list" [routerLink]="['/config-red/terminal']">Atrás</h3>
+              </div>
+          </div>
+
+          <div class="col d-flex justify-content-end">
+              <button mat-button class="hp-button-save mr-2" type="submit" [disabled]="isValidAccessLevel"><span class="material-icons-outlined mr-1" >save</span>Guardar</button>
+
+          </div>
+      </div>
+      </div>
+<div class="hp-group ">
+        <div class="hp-group-header">
+          <div class="hp-title">
+            <mat-icon>list_alt</mat-icon>
+            Información General
+          </div>
+        </div>
+        <div class="hp-group-body">
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Número de Serie
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="num_serial"
+                    formControlName="numSerial"
+                    maxlength="8"
+                    hp-validator="numeric"
+                  />
+
+                  <p class="hp-count">
+                    {{ fieldsContenido.value.numSerial?.length }} / 8
+                  </p>
+
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_SERIAL) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_SERIAL)"
+                  />
+
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_IS_SERIAL) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_IS_SERIAL)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Comercio
+                </label>
+                <div class="col-sm-9" style="display: flex">
+                  <input
+                    class="form-control"
+                    readonly
+                    type="text"
+                    [value]="viewMerchantName"
+                  />
+
+                  <div class="input-group-append" (click)="popupMerchant()">
+                    <span
+                      class="input-group-text"
+                      style="background-color: white"
+                      ><mat-icon>search</mat-icon></span
+                    >
+                  </div>
+
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_MERCHANT) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_MERCHANT)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Perfil de Comercio
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    type="text"
+                    [value]="profileMerchantCurrent"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Tipo
+                </label>
+                <div class="col-sm-9">
+                  <select class="form-control" [formControl]="tipoTerminalCtrl">
+                    <option
+                      *ngFor="let tipo of filteredTipoTerminal | async"
+                      [value]="tipo.id"
+                    >
+                      {{ tipo.name }}
+                    </option>
+                  </select>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_TIPO) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_TIPO)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Modelo
+                </label>
+                <div class="col-sm-9">
+                  <select
+                    class="form-control"
+                    [formControl]="modeloTerminalCtrl"
+                  >
+                    <option
+                      *ngFor="let modelo of filteredModeloTerminal | async"
+                      [value]="modelo.id"
+                    >
+                      {{ modelo.name }}
+                    </option>
+                  </select>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_MODELO) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_MODELO)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Descripción
+                </label>
+                <div class="col-sm-9">
+                  <textarea
+                    class="form-control"
+                    formControlName="description"
+                    type="text"
+                    name="description"
+                    [maxlength]="limitCharacter.description"
+                    hp-validator="alphanumericV2"
+                    (keypress)="utils.keyPressAlfaNumeric($event)"
+                  >
+                  </textarea>
+
+                  <p class="hp-count">
+                    {{ fieldsContenido.value.description?.length }} / 64
+                  </p>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_DESCRIPCION) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_DESCRIPCION)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Estado
+                </label>
+                <div class="col-sm-9">
+                  <select
+                    class="form-control"
+                    [formControl]="statusTerminalCtrl"
+                  >
+                    <option
+                      *ngFor="
+                        let estadoTerminal of filteredStatusTerminal | async
+                      "
+                      [value]="estadoTerminal.id"
+                    >
+                      {{ estadoTerminal.name }}
+                    </option>
+                  </select>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_STATUS) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_STATUS)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <!-- <label
+                  class="
+                    col-sm-3
+                    text-right
+                    control-label
+                    col-form-label
+                    offset-2
+                  "
+                >
+                  Multicomercio
+                </label> -->
+                <div class="group-checkbox col-sm-7 m-auto">
+                  <mat-checkbox
+                    [formControl]="multicomercioCtrl"
+                  >
+                  Multicomercio
+                  </mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Motivo
+                </label>
+                <div class="col-sm-9">
+                  <select
+                    class="form-control"
+                    [formControl]="motivoTerminalCtrl"
+                  >
+                    <option
+                      *ngFor="let motivo of filteredMotivoTerminal | async"
+                      [value]="motivo.id"
+                    >
+                      {{ motivo.name }}
+                    </option>
+                  </select>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_MOTIVO) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_MOTIVO)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <!-- <label
+                  class="
+                    col-sm-3
+                    text-right
+                    control-label
+                    col-form-label
+                    offset-2
+                  "
+                >
+                  Facturar
+                </label> -->
+                <div class="group-checkbox col-sm-7 m-auto">
+                  <mat-checkbox
+                    [formControl]="amountPaidCtrl"
+                  >
+                  Facturar
+                  </mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Título Ticket 1
+                </label>
+                <div class="col-sm-9">
+                  <input
+                  class="form-control"
+                  type="text"
+                  name="ticket1Ctrl"
+                  formControlName="ticket1Ctrl"
+                  maxlength="40"
+                  (keypress)="utils.keyPressAlfaNumeric($event)"
+                />
+                <p class="hp-count">
+                  {{ fieldsContenido.value.ticket1Ctrl?.length }} / 40
+                </p>
+                  <!-- <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_MOTIVO) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_MOTIVO)"
+                  /> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Título Ticket 2
+                </label>
+                <div class="col-sm-9">
+                  <input
+                  class="form-control"
+                  type="text"
+                  name="ticket2Ctrl"
+                  formControlName="ticket2Ctrl"
+                  maxlength="40"
+                  (keypress)="utils.keyPressAlfaNumeric($event)"
+                />
+
+                <p class="hp-count">
+                  {{ fieldsContenido.value.ticket2Ctrl?.length }} / 40
+                </p>
+                  <!-- <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_MOTIVO) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_MOTIVO)"
+                  /> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <ng-container *ngIf="appsSelected">
+  <div class="hp-group ">
+          <div class="hp-group-header">
+            <div class="hp-title">
+              <mat-icon>list_alt</mat-icon>
+              Aplicaciones
+              <img
+                class="hp-icon-error2"
+                src="assets/images/erroricon.png"
+                *ngIf="getMessage(MSG_APP) != MSG_NONE"
+                [matTooltip]="getMessage(MSG_APP)"
+              />
+            </div>
+          </div>
+          <div class="hp-group-body">
+            <div class="hp-section-label">
+              <div *ngFor="let app of appsSelected" class="hp-label">
+                {{ utils.getAppNameById(app) }}
+              </div>
+              <div (click)="labelSelect.open()">
+                <span class="material-icons"> add_box </span>
+              </div>
+              <mat-select
+                #labelSelect="matSelect"
+                class="hp-select-hide"
+                [value]="appsSelected"
+                (selectionChange)="appsChange($event)"
+                multiple
+              >
+                <mat-option
+                  *ngFor="let app of innerInformation | keyvalue"
+                  [value]="app.key"
+                >
+                  <span>{{ utils.getAppNameById(app.key) }}</span>
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+
+  <div class="hp-group ">
+          <div class="hp-group-header">
+            <div class="hp-title">
+              <mat-icon>list_alt</mat-icon>
+              Datos Adicionales
+            </div>
+          </div>
+          <div class="hp-group-body">
+            <mat-tab-group>
+              <mat-tab
+                *ngFor="let app of appsSelected"
+                [label]="utils.getAppNameById(app)"
+              >
+                <br />
+                <app-dynamictable
+                  [dataTable]="innerInformation.get(app).listTrasacction"
+                  [showColumns]="showColumns"
+                  [menuColumns]="menuColumns"
+                  [selectIdValue]="selectIdValue"
+                  [checkBox]="checkBox"
+                  [arrayOfTable]="arrayOfTable"
+                  [clearFilter]="clearFilter"
+                  [checkBoxColor]="checkBoxColor"
+                  [disableCheck]="false"
+                  [permiteAllSelect]="false"
+                  [porcentajeTamaño]="0.5"
+                  [havePaginator]="havePaginator"
+                  [deleteMany]="false"
+                  [dataSelect]="
+                    innerInformation.get(app).listTrasacctionSelection
+                  "
+                  (outPutEventEmitter)="
+                    processDataOutPut(utils.getDataOutPut($event))
+                  "
+                  [animal]="''"
+                  [name]="''"
+                >
+                </app-dynamictable>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+        <br />
+      </ng-container>
+    </form>
+  </ng-template>
+
+  <div class="hp-module-loader" *ngIf="isTerminalSaveProccess">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+  <div class="hp-module-loader" *ngIf="isProfileMerchantProccess">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+</div>

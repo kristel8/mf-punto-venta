@@ -1,0 +1,287 @@
+<div class="hp-container">
+
+  <div class="header__bac">
+    <div class="header__bac-tree">
+      <label class="label-prev-chev">Configuración de punto de venta</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+      <label class="label-prev-chev">Mantenimiento Cadena de Comercio</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+
+      <label class="label-post-chev">Nuevo</label>
+    </div>
+
+    <label class="fontH">Nueva Cadena de Comercio</label>
+  </div>
+
+  <!-- <div class="hp-header">
+    <h3 class="hp-title">Nueva Cadena de Comercio</h3>
+    <div class="hp-path">
+      <span class="material-icons">home</span>
+      <span class="material-icons">navigate_next</span>
+      Configuración de punto de venta
+      <span class="material-icons">navigate_next</span>
+      Mantenimiento Cadena de Comercio
+      <span class="material-icons">navigate_next</span>
+      Nueva
+    </div>
+  </div>
+  <mat-divider></mat-divider> -->
+
+  <div class="hp-module-loader" *ngIf="isMerchantChainLoad; else elseBlock">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+  <ng-template #elseBlock>
+    <form
+      class="form-horizontal"
+      autocomplete="off"
+      [formGroup]="fieldsContenido"
+      (ngSubmit)="guardar()"
+    >
+
+    <div class="text-right my-3">
+      <div class="row">
+        <div class="col">
+            <div class="row pl-3 mt-2">
+                <span class="material-icons back-to-list" [routerLink]="['/config-red/cadena-comercio']">arrow_back_ios</span>
+                <h3 class="fontH back-to-list" [routerLink]="['/config-red/cadena-comercio']">Atrás</h3>
+            </div>
+        </div>
+
+        <div class="col d-flex justify-content-end">
+            <button mat-button class="hp-button-save mr-2" type="submit" [disabled]="isValidAccessLevel || isMerchantChainSaveProccess"><span class="material-icons-outlined mr-1" >save</span>Guardar</button>
+        </div>
+    </div>
+    </div>
+<div class="hp-group ">
+        <div class="hp-group-header">
+          <div class="hp-title">
+            <mat-icon>list_alt</mat-icon>
+            Información General
+          </div>
+        </div>
+        <div class="hp-group-body">
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Nombre
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    type="text"
+                    formControlName="dmcChainName"
+                    name="dmcChainName"
+                    hp-validator="alphanumericV2"
+                    minlength="1"
+                    [maxLength]="this.limitCharacter.nombre"
+                    required
+                  />
+
+                  <p class="hp-count">
+                    {{ fieldsContenido.controls.dmcChainName.value.length }}/{{
+                      limitCharacter.nombre
+                    }}
+                  </p>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_FULLNAME) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_FULLNAME)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Código Jurídico/RUC
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="dmcRUC"
+                    formControlName="dmcRUC"
+                    [maxLength]="this.limitCharacter.codJuridicoRuc"
+                    hp-validator="numeric"
+                    required
+                  />
+
+                  <p class="hp-count">
+                    {{ fieldsContenido.controls.dmcRUC.value?.length }}/{{
+                      limitCharacter.codJuridicoRuc
+                    }}
+                  </p>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_RUC) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_RUC)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Aplicación
+                </label>
+                <div class="col-sm-9">
+                  <select
+                    class="form-control"
+                    formControlName="cmcapplicationID"
+                  >
+                    <option
+                      *ngFor="let app of listApp"
+                      [value]="app.capApplicationID"
+                    >
+                      {{ app.dapApplicationName }}
+                    </option>
+                  </select>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_APPLICATION) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_APPLICATION)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Descripción
+                </label>
+                <div class="col-sm-9">
+                  <textarea
+                    class="form-control"
+                    type="text"
+                    name="dmcdescription"
+                    formControlName="dmcdescription"
+                    [maxlength]="limitCharacter.description"
+                    required
+                    hp-validator="alphanumericV2"
+                  >
+                  </textarea>
+                  <p class="hp-count">
+                    {{
+                      fieldsContenido.controls.dmcdescription.value.length
+                    }}/{{ limitCharacter.description }}
+                  </p>
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_DESCRIPTION) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_DESCRIPTION)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<br>
+<div class="hp-group ">
+        <div class="hp-group-header">
+          <div class="hp-title">
+            <mat-icon>list_alt</mat-icon>
+            Limites de Piso
+          </div>
+        </div>
+
+        <div class="hp-group-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <p><b>Moneda local (c)</b></p>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group row">
+                    <label
+                      class="col-sm-3 text-right control-label col-form-label"
+                    >
+                      Límite de Piso
+                    </label>
+                    <div class="col-sm-9">
+                      <input
+                        currencyMask
+                        (click)="putCursorEnd($event)"
+                        class="form-control"
+                        type="text"
+                        maxlength="12"
+                        formControlName="cmclimitAmount"
+                        name="cmclimitAmount"
+                      />
+
+
+                      <p class="hp-count">
+                        {{
+                          getLength(
+                            fieldsContenido.controls.cmclimitAmount.value
+                          )
+                        }}/12
+                      </p>
+                      <img
+                        class="hp-icon-error"
+                        src="assets/images/erroricon.png"
+                        *ngIf="getMessage(MSG_LIMIT_LOCAL) != MSG_NONE"
+                        [matTooltip]="getMessage(MSG_LIMIT_LOCAL)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <p><b>Moneda Extranjera (US$)</b></p>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group row">
+                    <label
+                      class="col-sm-3 text-right control-label col-form-label"
+                    >
+                      Límite de Piso
+                    </label>
+                    <div class="col-sm-9">
+                      <input
+                        currencyMask
+                        (click)="putCursorEnd($event)"
+                        class="form-control"
+                        type="text"
+                        maxlength="12"
+                        formControlName="cmclimitAmountDollar"
+                        name="cmclimitAmountDollar"
+                      />
+
+
+                      <p class="hp-count">
+                        {{
+                          getLength(
+                            fieldsContenido.controls.cmclimitAmountDollar.value
+                          )
+                        }}/12
+                      </p>
+                      <img
+                        class="hp-icon-error"
+                        src="assets/images/erroricon.png"
+                        *ngIf="getMessage(MSG_LIMIT_EXT) != MSG_NONE"
+                        [matTooltip]="getMessage(MSG_LIMIT_EXT)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <br />
+    </form>
+  </ng-template>
+
+  <div class="hp-module-loader" *ngIf="isMerchantChainSaveProccess">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+.btnFocus {
+  background: #505050;
+  color: #ffffff;
+}
+
+.fontclass-chica-subt {
+
+  font-size: 15px !important;
+  font-style: bold;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-title {
+
+  font-size: 20px !important;
+  font-style: bold;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-combo {
+
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.iconProp {
+  width: 15px;
+  font-size: 9px;
+}
+
+/*
+.content{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}*/
+
+.iconPropDialog {
+  margin-top: 50%;
+  width: 58px;
+}
+
+.padre {
+  display: flex;
+  justify-content: center;
+}
+
+.hijo {
+  padding: 2px;
+  margin: 10px;
+}
+
+.loading-main {
+  width: 30px;
+  height: 30px;
+}
+
+.format-main {
+  width: 600px;
+  height: 170px;
+}

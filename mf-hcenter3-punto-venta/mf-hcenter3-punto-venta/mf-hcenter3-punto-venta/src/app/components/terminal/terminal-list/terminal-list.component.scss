@@ -1,0 +1,187 @@
+/*
+table {
+    width: 70%;
+    margin-left: 15%;
+}*/
+
+.table-url {
+  width: 70px;
+  margin-left: 70%;
+}
+
+.example-card {
+    max-width: 400px;
+  }
+
+.example-table{
+    max-width: 50px;
+}
+
+.iconProp{
+  color: rgba(66, 66, 66);
+  width: 15px;
+}
+
+.labelProp{
+  color: rgba(66, 66, 66);
+}
+
+.align{
+  margin-left: 1rem;
+}
+/*
+.cardProp{
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}*/
+
+.tableProp {
+  width: 100%;
+}
+
+.prop:hover {
+  background: #777;
+}
+
+.mat-row:hover {
+  background: #efefef;
+}
+
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.iconPropDialog{
+  width: 28px;
+}
+
+.btnMaintenance{
+  background: rgb(51, 51, 51);
+}
+
+.iconMaintenance{
+  width: 28px;
+  vertical-align : top ;
+}
+
+.row{
+  cursor: pointer;
+}
+
+//2do tab
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+
+.example-form-field {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.flotar{
+  float: left;
+}
+
+.mover{
+  text-align: left;
+}
+
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.div_continuos{
+  float: left;
+  margin-left: 25px;
+}
+
+.font-custom{
+  margin: 0;
+}
+
+.btnFocus{
+  background: #505050;
+  color: #ffffff;
+  margin-right: 0.25rem;
+}
+
+.fontclass-chica-combo {
+
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-combo {
+
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+//nuevo estuilo para mat header
+.card-container-right{
+  display: inline;
+  float: right;
+  min-width: 100px;
+}
+
+.card-container-left{
+  display: inline;
+}
+
+.card-container-center{
+  display: inline;
+  margin-left: 35%;
+}
+
+.porcentaje-space {
+  margin-left: 77%
+}
+
+
+.mat-icon{
+  font-size: 20px;
+}
+
+.loading-main{
+  width: 30px;
+  height: 30px;
+  margin-left: 45%;
+  margin-top: 15%;
+}
+
+::ng-deep mat-progress-bar {
+ margin-left: 35%;
+}
+
+.separador-grilla {
+  height: 50px;
+  weight: 50px;
+}
+
+.space-progress-bar-left {
+  float: left;
+}
+
+.space-progress-bar-margin {
+  margin-left: 18%;
+}

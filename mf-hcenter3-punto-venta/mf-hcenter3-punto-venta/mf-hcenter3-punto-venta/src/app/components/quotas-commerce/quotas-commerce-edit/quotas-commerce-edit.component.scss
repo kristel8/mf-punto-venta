@@ -1,0 +1,116 @@
+.fontclass-chica-combo {
+
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-label {
+  font-size: 10px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.fontclass-chica-combo-bold {
+
+  font-size: 11px !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+}
+
+.card-container-right {
+  display: inline;
+}
+
+.card-container-left {
+  display: inline;
+}
+
+.fontclass-chica {
+
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 38px;
+}
+
+.space-progress-bar-left {
+  float: left;
+}
+
+.iconProp {
+  width: 15px;
+  font-size: 9px;
+}
+
+.btnFocus {
+  background: #505050;
+  color: #ffffff;
+  margin-right: 0.25rem;
+}
+
+.mat-icon {
+  font-size: 20px;
+}
+
+.header-cupo {
+  margin: 5px;
+}
+
+.header-cupo h3 {
+  display: inline-block;
+  font-size: 15px;
+}
+
+.header-cupo button {
+  float: right;
+}
+
+.fix-altura {
+  height: calc(100% - 50px);
+}
+
+fieldset {
+  width: 97%;
+  margin: 10px auto;
+}
+
+fieldset .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+  background-color: #ffffff;
+}
+
+.containercommission {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.fontTitle {
+
+  font-weight: normal;
+  font-size: 20px;
+  color: #433e3f;
+}
+
+select,
+input {
+  height: 30px;
+  font-size: 14px;
+}
+
+
+
+
+.mat-radio-ripple ~ .mat-ripple {
+  height: 20px;
+  width: 20px;
+}
+
+.overflow-table-container {
+  position: relative;
+  overflow: auto;
+}

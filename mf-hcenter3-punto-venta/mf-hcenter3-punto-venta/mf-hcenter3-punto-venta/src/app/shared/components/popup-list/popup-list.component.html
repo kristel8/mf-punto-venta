@@ -1,0 +1,82 @@
+<h2 mat-dialog-title class="fontclass-chica-title" style="margin-bottom: 5px">
+  {{ title }}
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="content" style="overflow: inherit">
+  <div class="padre" style="display: block">
+    <!--
+        <div class="hijo"><img class="iconPropDialog" src="assets/images/warningicon.png"></div>
+        <div class="hijo"><p class="fontclass-chica-subt"> {{body}} </p></div>
+        -->
+
+    <div class="hijo">
+      <div
+        *ngIf="isMerchartProccess"
+        class="loading-main-possition-app containt-space-country"
+        style="text-align: center"
+      >
+        <img
+          class="loading-main"
+          src="assets/images/loading.gif"
+          alt="Loading-img"
+        />
+      </div>
+      <app-dynamictable
+        [dataTable]="dataInput"
+        [showColumns]="showColumns"
+        [menuColumns]="menuColumns"
+        [selectIdValue]="selectIdValue"
+        [checkBox]="checkBox"
+        [deleteMany]="deleteMany"
+        [arrayOfTable]="arrayOfTable"
+        [porcentajeTamaño]="0.55"
+        [clearFilter]="clearFilter"
+        [checkBoxColor]="checkBoxColor"
+        [uniqueSelect]="uniqueSelect"
+        [permiteAllSelect]="false"
+        [dataSelect]="merchantSelection"
+        [isClickableRow]="isClickableRow"
+        [componenteDialog]="componenteDialog"
+        (outPutEventEmitter)="processDataOutPut(utils.getDataOutPut($event))"
+        (outPutEventEmitterShowColumn)="getShowColumn($event)"
+        *ngIf="!isMerchartProccess"
+        [animal]="animal"
+        [name]="name"
+      ></app-dynamictable>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+  <div *ngIf="showCharge">
+    <img
+      class="loading-main"
+      src="assets/images/loading.gif"
+      alt="Loading-img"
+    />
+  </div>
+  <mat-label
+    class="fontclass-chica-label-error-message"
+    *ngIf="getMessage(MSG_MERCHANT) != MSG_NONE"
+    >{{ getMessage(MSG_MERCHANT) }}</mat-label
+  >
+  <button
+    mat-stroked-button
+    type="button"
+    (click)="onNoClick()"
+    class="fontclass-chica-subt hp__buttons-cancel"
+    *ngIf="!showCharge"
+  >
+    Cancelar
+  </button>
+  <button
+    mat-stroked-button
+    type="button"
+    (click)="callBack()"
+    class="btnFocus fontclass-chica-subt hp__buttons-save"
+    *ngIf="!showCharge"
+  >
+    <!-- <mat-icon>check</mat-icon>  -->
+    Aceptar
+  </button>
+</mat-dialog-actions>

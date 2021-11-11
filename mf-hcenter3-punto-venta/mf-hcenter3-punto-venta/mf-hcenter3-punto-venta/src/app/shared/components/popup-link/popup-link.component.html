@@ -1,0 +1,90 @@
+<!--
+    <mat-spinner *ngIf="isLoading" style="margin:0 auto;" [diameter]="30" mode="indeterminate"></mat-spinner>
+  <div>
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="cmrmerchantid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>
+                <div style="margin-bottom: 9px;" [style.fontSize.rem]="1.0"><strong>ID de Comercio</strong></div>
+
+                <mat-form-field [style.width.%]=100>
+                    <mat-label>Filtrar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)"  placeholder="" #input>
+                </mat-form-field>
+            </div>
+        </th>
+        <td mat-cell *matCellDef="let row"> {{row.cmrmerchantid}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dmrmerchantname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+            <div>
+                <div style="margin-bottom: 9px;" [style.fontSize.rem]="1.0"><strong>Nombre Comercio </strong></div>
+                <mat-form-field [style.width.%]=100>
+                    <mat-label>Filtrar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)"  placeholder="" #input>
+                </mat-form-field>
+            </div>
+        </th>
+        <td mat-cell *matCellDef="let row"> {{row.dmrmerchantname}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dmcchainname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+            <div>
+                <div style="margin-bottom: 9px;" [style.fontSize.rem]="1.0"><strong>Cadena Comercio</strong></div>
+                <mat-form-field [style.width.%]=100>
+                    <mat-label>Filtrar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)"  placeholder="" #input>
+                </mat-form-field>
+            </div>
+        </th>
+        <td mat-cell *matCellDef="let row"> {{row.dmcchainname}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cmrprofileid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>
+                <div style="margin-bottom: 9px;" [style.fontSize.rem]="1.0"><strong>Perfil Comercio</strong></div>
+                <mat-form-field [style.width.%]=100>
+                    <mat-label>Filtrar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)"  placeholder="" #input>
+                </mat-form-field>
+            </div>
+
+        </th>
+        <td mat-cell *matCellDef="let row"> {{row.cmrprofileid}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cmrstatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+            <div>
+                <div style="margin-bottom: 9px;" [style.fontSize.rem]="1.0"><strong>Estado</strong></div>
+                <mat-form-field [style.width.%]=100>
+                    <mat-label>Filtrar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)"  placeholder="" #input>
+                </mat-form-field>
+            </div>
+        </th>
+        <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.cmrstatus == '0'">HABILITADO</span>
+            <span *ngIf="row.cmrstatus == '1'">DESHABILITADO</span>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+
+  <div class="nodata" *ngIf="dataSource.data.length === 0 && !isLoading">No se encontraron registros</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close [mat-dialog-close]=null>Cerrar</button>
+</mat-dialog-actions> -->

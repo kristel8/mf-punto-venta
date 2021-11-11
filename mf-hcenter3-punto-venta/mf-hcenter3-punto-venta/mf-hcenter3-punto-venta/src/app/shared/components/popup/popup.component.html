@@ -1,0 +1,58 @@
+<h2 mat-dialog-title class="fontclass-chica-title">{{ title }}</h2>
+<!-- <mat-divider></mat-divider> -->
+<mat-dialog-content class="content">
+  <div class="padre">
+    <div class="hijo">
+      <img class="iconPropDialog" src="assets/images/warningicon.png" />
+    </div>
+    <div class="hijo">
+      <p class="fontclass-chica-subt">{{ body }}</p>
+    </div>
+  </div>
+</mat-dialog-content>
+<!-- <mat-divider></mat-divider> -->
+<mat-dialog-actions align="end">
+  <div *ngIf="showCharge">
+    <img
+      class="loading-main"
+      src="assets/images/loading.gif"
+      alt="Loading-img"
+    />
+  </div>
+  <div class="text-error">
+    {{ message }}
+  </div>
+  <div class="separator-button">
+    <!-- <div class="row"> -->
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="onNoClick()"
+          class="fontclass-chica-subt hp__buttons-cancel"
+          *ngIf="!showCharge && !aceptarInVacio"
+        >
+          Cancelar
+        </button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="callBack()"
+        class="btnFocus fontclass-chica-subt hp__buttons-save"
+        *ngIf="!showCharge && !showError"
+      >
+        <!-- <mat-icon>check</mat-icon>  -->
+        Aceptar
+      </button>
+    </div>
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="onNoClick()"
+      class="fontclass-chica-subt hp__buttons-save"
+      *ngIf="aceptarInVacio"
+    >
+      Aceptar
+    </button>
+  <!-- </div> -->
+</mat-dialog-actions>

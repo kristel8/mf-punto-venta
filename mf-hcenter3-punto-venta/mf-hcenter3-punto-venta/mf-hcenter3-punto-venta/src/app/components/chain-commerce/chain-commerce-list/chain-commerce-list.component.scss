@@ -1,0 +1,188 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-table {
+  max-width: 50px;
+}
+
+.iconProp {
+  width: 15px;
+  font-size: 9px;
+}
+
+.labelProp {
+  color: rgba(66, 66, 66);
+}
+
+.align {
+  margin-left: 1rem;
+}
+/*
+.cardProp{
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}*/
+
+.tableProp {
+  width: 100%;
+}
+
+.prop:hover {
+  background: #777;
+}
+
+.mat-row:hover {
+  background: #efefef;
+}
+
+.example-container {
+  height: 250px;
+  overflow: auto;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.iconPropDialog {
+  width: 28px;
+}
+
+.btnMaintenance {
+  background: rgb(51, 51, 51);
+}
+
+.iconMaintenance {
+  width: 28px;
+  vertical-align: top;
+}
+
+.row {
+  cursor: pointer;
+}
+
+//2do tab
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-form-field {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.flotar {
+  float: left;
+}
+
+.mover {
+  text-align: left;
+}
+
+::ng-deep .mat-card > :first-child {
+  margin-top: -10px !important;
+}
+
+::ng-deep .mat-stroked-button[disabled][disabled] {
+  background: #818181;
+  color: #444444;
+  margin-right: 0.25rem;
+}
+
+.fontclass {
+
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 38px;
+}
+.fontclass-chica {
+
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 38px;
+}
+p {
+
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+blockquote {
+
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+pre {
+
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 18.5714px;
+}
+
+.fontclass-chica-combo {
+  font-size: 11px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+
+.btnFocus {
+  background: #505050;
+  color: #ffffff;
+  margin-right: 0.25rem;
+}
+
+.propHeader {
+  /*  not needed styles to reflect it */
+  display: flex;
+  justify-content: right;
+}
+
+.mr {
+  margin-right: 5px;
+}
+
+.mat-spinner-color::ng-deep circle {
+  stroke: #4d4d4d !important;
+}
+
+.card-container-left {
+  display: inline;
+}
+
+.card-container-right {
+  display: inline;
+  float: right;
+}
+
+.loading-main {
+  width: 30px;
+  height: 30px;
+  margin-left: 45%;
+  margin-top: 15%;
+}
+.separador-grilla {
+  height: 30px;
+  weight: 40px;
+}

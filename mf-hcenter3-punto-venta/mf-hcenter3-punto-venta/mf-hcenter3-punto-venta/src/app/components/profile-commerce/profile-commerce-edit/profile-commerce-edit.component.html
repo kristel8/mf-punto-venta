@@ -1,0 +1,561 @@
+<div class="hp-container">
+  <div class="header__bac">
+    <div class="header__bac-tree">
+      <label class="label-prev-chev">Configuración de punto de venta</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+      <label class="label-prev-chev">Perfil de Comercio</label>
+      <mat-icon style="font-family: 'Material Icons'">chevron_right</mat-icon>
+
+      <label class="label-post-chev">Editar</label>
+    </div>
+
+    <label class="fontH">Editar Perfil de Comercio</label>
+  </div>
+
+  <!-- <div class="hp-header">
+    <h3 class="hp-title">Editar Perfil de Comercio</h3>
+    <div class="hp-path">
+      <span class="material-icons">home</span>
+      <span class="material-icons">navigate_next</span>
+      Configuración de punto de venta
+      <span class="material-icons">navigate_next</span>
+      Perfil de Comercio
+      <span class="material-icons">navigate_next</span>
+      Editar
+    </div>
+  </div>
+  <mat-divider></mat-divider> -->
+
+  <div class="hp-module-loader" *ngIf="isPerfilComercioLoad; else elseBlock">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+  <ng-template #elseBlock>
+    <form
+      class="form-horizontal"
+      autocomplete="off"
+      name="form"
+      (ngSubmit)="onSubmit(f)"
+      #f="ngForm"
+    >
+      <div class="text-right my-3">
+        <div class="row">
+          <div class="col">
+            <div class="row pl-3 mt-2">
+              <span
+                class="material-icons back-to-list"
+                [routerLink]="['/config-red/perfil-comercio']"
+                >arrow_back_ios</span
+              >
+              <h3
+                class="fontH back-to-list"
+                [routerLink]="['/config-red/perfil-comercio']"
+              >
+                Atrás
+              </h3>
+            </div>
+          </div>
+
+          <div class="col d-flex justify-content-end">
+            <button
+              mat-button
+              class="hp-button-save mr-2"
+              type="submit"
+              [disabled]="
+                isValidAccessLevelModify || isMerchantProfileSaveProccess
+              "
+            >
+              <span class="material-icons-outlined mr-1">save</span>Guardar
+            </button>
+            <button
+              mat-button
+              class="hp-button-delete"
+              type="button"
+              (click)="popupDelete()"
+              [disabled]="isValidAccessLevel"
+            >
+              <span class="material-icons-outlined mr-1">delete</span>Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="hp-group">
+        <div class="hp-group-header">
+          <div class="hp-title">
+            <mat-icon>list_alt</mat-icon>
+            Información General
+          </div>
+        </div>
+        <div class="hp-group-body">
+          <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Nombre del Perfil
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="form['cmpprofileId']"
+                    name="cmpprofileId"
+                    [disabled]="true"
+                    minlength="1"
+                    [maxlength]="limitCharacter.nombrePerfil"
+                    #firstName="ngModel"
+                    required
+                    tabindex="5"
+                    hp-validator="alphanumeric"
+                  />
+                  <p class="hp-count">
+                    {{ firstName.value?.length }} /
+                    {{ limitCharacter.nombrePerfil }}
+                  </p>
+
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_NAME) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_NAME)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <!-- <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">
+                  Seleccione Aplicación
+                  <img
+                    class="hp-icon-error"
+                    src="assets/images/erroricon.png"
+                    *ngIf="getMessage(MSG_APPLICATION) != MSG_NONE"
+                    [matTooltip]="getMessage(MSG_APPLICATION)"
+                  />
+                </label>
+                <div class="tablaCheck col-sm-9">
+                  <mat-checkbox
+                    class="hp-fix-width"
+                    [style]="setCheckBoxColor"
+                    (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                  >
+                    Todos
+                  </mat-checkbox>
+                  <ng-container
+                    *ngFor="let app of listaAplicacion; let y = index"
+                  >
+                    &nbsp;
+                    <mat-checkbox
+                      class="hp-fix-width"
+                      [style]="setCheckBoxColor"
+                      (change)="$event ? selCheckBoxUnit(app) : null"
+                      [checked]="selection.isSelected(app)"
+                      [(ngModel)]="app.status"
+                      [ngModelOptions]="{ standalone: true }"
+                    >
+                      {{ app.dapApplicationName }}
+                    </mat-checkbox>
+                  </ng-container>
+                </div>
+              </div> -->
+              <ng-multiselect-dropdown
+                name="select-dropdown"
+                [placeholder]="'Seleccione'"
+                [settings]="dropdownSettings"
+                [data]="listaAplicacion"
+                [(ngModel)]="selectedItems"
+                (onSelect)="onParamSelect($event)"
+                (onDeSelect)="onParamDeselect($event)"
+                (onSelectAll)="onParamSelectAll($event)"
+                (onDeSelectAll)="onParamDeselectAll($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hp-group" *ngIf="verificarArray()">
+        <div class="hp-group-header">
+          <div class="hp-title">
+            <mat-icon>list_alt</mat-icon>
+            Aplicaciones
+          </div>
+        </div>
+        <div class="hp-group-body">
+          <mat-tab-group>
+            <mat-tab
+              *ngFor="let app of mapMerchantProfileApp | keyvalue"
+              label="{{ app.key.dapApplicationName }}"
+            >
+              <br />
+              <mat-card class="hp-group" *ngIf="app.value.show">
+                <div class="row">
+                  <div class="col-sm-12 col-lg-6">
+                    <app-dynamictable
+                      [dataTable]="app.value.listTransactionType"
+                      [showColumns]="showColumns"
+                      [menuColumns]="menuColumns"
+                      [selectIdValue]="selectIdValue"
+                      [checkBox]="checkBox"
+                      [arrayOfTable]="arrayOfTable"
+                      [clearFilter]="clearFilter"
+                      [checkBoxColor]="checkBoxColor"
+                      [porcentajeTamaño]="0.55"
+                      [havePaginator]="havePaginator"
+                      [dataSelect]="app.value.selectItemInit"
+                      [flagOrderSelectionItems]="flagOrderSelectionItems"
+                      [deleteMany]="false"
+                      (outPutEventEmitter)="
+                        app.value.processDataOutPut(utils.getDataOutPut($event))
+                      "
+                      *ngIf="utils.dataIsValid(app.value.listTransactionType)"
+                      [animal]="''"
+                      [name]="''"
+                    ></app-dynamictable>
+                  </div>
+                  <div class="col-sm-12 col-lg-6">
+                    <br />
+
+                    <div class="checkbox">
+                      <div class="checkbox__item">
+                        <mat-checkbox
+                          [style]="setCheckBoxColor"
+                          [(ngModel)]="app.value.flagMultimoneda"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-label>Multimoneda&nbsp;</mat-label>
+                        </mat-checkbox>
+                      </div>
+                      <div class="checkbox__item">
+                        <mat-checkbox
+                          [style]="setCheckBoxColor"
+                          [(ngModel)]="app.value.flagCuatroUlDigitos"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-label>4 Últimos Dígitos&nbsp;</mat-label>
+                        </mat-checkbox>
+                      </div>
+                      <div class="checkbox__item">
+                        <mat-checkbox
+                          [style]="setCheckBoxColor"
+                          [(ngModel)]="app.value.flagSolicitarDNI"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-label>Solicitar DNI&nbsp;</mat-label>
+                        </mat-checkbox>
+                      </div>
+                      <div class="checkbox__item">
+                        <mat-checkbox
+                          [style]="setCheckBoxColor"
+                          [(ngModel)]="app.value.flagCashBack"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-label>CashBack&nbsp;</mat-label>
+                        </mat-checkbox>
+                      </div>
+                      <div class="checkbox__item">
+                        <mat-checkbox
+                          [style]="setCheckBoxColor"
+                          [(ngModel)]="app.value.flagMultiproducto"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-label>MultiProducto</mat-label>
+                        </mat-checkbox>
+                      </div>
+                    </div>
+
+                    <hr />
+                    <div class="select">
+                      <div class="select__item">
+                        <mat-label>Digitación de Tarjeta:</mat-label>
+                        <mat-select
+                          [(ngModel)]="app.value.valueDigitacionTarjeta"
+                          placheholder="Seleccionar"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option [value]="''">--Seleccionar--</mat-option>
+                          <mat-option
+                            *ngFor="
+                              let option of listComboBoxDigitacionTarjeta;
+                              let i = index
+                            "
+                            [value]="option.valueCode"
+                          >
+                            {{ option.description }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="select__item">
+                        <mat-label>Tipo de Cierre:</mat-label>
+                        <mat-select
+                          [(ngModel)]="app.value.valueTipoCierre"
+                          placheholder="Seleccionar"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option [value]="''">--Seleccionar--</mat-option>
+                          <mat-option
+                            *ngFor="
+                              let option of listComboBoxTipoCierre;
+                              let i = index
+                            "
+                            [value]="option.valueCode"
+                          >
+                            {{ option.description }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="select__item">
+                        <mat-label>Transacción por Defecto:</mat-label>
+                        <mat-select
+                          [(ngModel)]="app.value.valueTrxDefault"
+                          placheholder="Seleccionar"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option [value]="''">--Seleccionar--</mat-option>
+                          <mat-option
+                            *ngFor="
+                              let option of listComboBoxTransaccionDefecto
+                            "
+                            [value]="option.description"
+                          >
+                            {{ option.description }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="select__item">
+                        <mat-label
+                          >Tipo Ingreso Tarjeta Confirmación:</mat-label
+                        >
+                        <mat-select
+                          [(ngModel)]="app.value.valueIngresoTarejta"
+                          placheholder="Seleccionar"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option [value]="''">--Seleccionar--</mat-option>
+                          <mat-option
+                            *ngFor="
+                              let option of listComboBoxIngresoTarjeta;
+                              let i = index
+                            "
+                            [value]="option.valueCode"
+                          >
+                            {{ option.description }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                    </div>
+                    <br />
+                    <hr />
+
+                    <div class="dates">
+                      <!--  <mat-checkbox
+                        [style]="setCheckBoxColor"
+                        [(ngModel)]="app.value.flagHoraAtencion"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <mat-label>Horario de Atención</mat-label>
+                      </mat-checkbox> -->
+
+                      <mat-slide-toggle
+                        [(ngModel)]="app.value.flagHoraAtencion"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        Horario de Atención
+                      </mat-slide-toggle>
+
+                      <div class="dates__input">
+                        <mat-label style="width: 45px">Desde: </mat-label>
+                        <mat-select
+                          [(ngModel)]="app.value.valueHoraInicio"
+                          [disabled]="!app.value.flagHoraAtencion"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option
+                            *ngFor="let option of listComboBoxHoraAtencion"
+                            [value]="option"
+                            >{{ option }}<mat-label>hrs</mat-label></mat-option
+                          >
+                        </mat-select>
+
+                        <mat-select
+                          [(ngModel)]="app.value.valueMinutoInicio"
+                          [disabled]="!app.value.flagHoraAtencion"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option
+                            *ngFor="let option of listComboBoxMinutoAtencion"
+                            [value]="option"
+                            >{{ option.substring(0, 2) }}
+                            <mat-label>min</mat-label></mat-option
+                          >
+                        </mat-select>
+                        <img
+                          class="hp-icon-error2"
+                          src="assets/images/erroricon.png"
+                          *ngIf="
+                            getMessage(
+                              MSG_HORARIO_ATENCION + app.key.capApplicationID
+                            ) != MSG_NONE
+                          "
+                          [matTooltip]="
+                            getMessage(
+                              MSG_HORARIO_ATENCION + app.key.capApplicationID
+                            )
+                          "
+                        />
+                      </div>
+
+                      <div class="dates__input">
+                        <mat-label style="width: 45px">Hasta: </mat-label>
+                        <mat-select
+                          [(ngModel)]="app.value.valueHoraFin"
+                          [disabled]="!app.value.flagHoraAtencion"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option
+                            *ngFor="let option of listComboBoxHoraAtencion"
+                            [value]="option"
+                            >{{ option }} <mat-label>hrs</mat-label></mat-option
+                          >
+                        </mat-select>
+
+                        <mat-select
+                          [(ngModel)]="app.value.valueMinutoFin"
+                          [disabled]="!app.value.flagHoraAtencion"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-option
+                            *ngFor="let option of listComboBoxMinutoAtencion"
+                            [value]="option"
+                            >{{ option.substring(0, 2) }}
+                            <mat-label>min</mat-label></mat-option
+                          >
+                        </mat-select>
+                        <img
+                          class="hp-icon-error2"
+                          src="assets/images/erroricon.png"
+                          *ngIf="
+                            getMessage(
+                              MSG_HORARIO_ATENCION + app.key.capApplicationID
+                            ) != MSG_NONE
+                          "
+                          [matTooltip]="
+                            getMessage(
+                              MSG_HORARIO_ATENCION + app.key.capApplicationID
+                            )
+                          "
+                        />
+                      </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="alarm">
+
+                    <mat-slide-toggle
+                      [(ngModel)]="app.value.flagAlarmaMontoMinimo"
+                      [ngModelOptions]="{ standalone: true }"
+                    >
+                      Alarma de Monto Minimo&nbsp;
+                    </mat-slide-toggle>
+
+                    <div class="alarm__checkbox">
+                      <mat-checkbox
+                        [style]="setCheckBoxColor"
+                        [(ngModel)]="app.value.flagAlarmaSMS"
+                        [disabled]="!app.value.flagAlarmaMontoMinimo"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <mat-label>Alarma SMS&nbsp;</mat-label>
+                      </mat-checkbox>
+                        <mat-checkbox
+                          [style]="setCheckBoxColor"
+                          [(ngModel)]="app.value.flagAlamarEmail"
+                          [disabled]="!app.value.flagAlarmaMontoMinimo"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <mat-label>Alarma E-mail</mat-label>
+                        </mat-checkbox>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group row">
+                          <label class="col-sm-6 control-label col-form-label">
+                            Monto Moneda Local:
+                            <img
+                              class="hp-icon-error2"
+                              src="assets/images/erroricon.png"
+                              *ngIf="
+                                getMessage(
+                                  MSG_MONTO_MINIMO + app.key.capApplicationID
+                                ) != MSG_NONE
+                              "
+                              [matTooltip]="
+                                getMessage(
+                                  MSG_MONTO_MINIMO + app.key.capApplicationID
+                                )
+                              "
+                            />
+                          </label>
+
+                          <div class="col-sm-6">
+                            <input
+                              class="form-control"
+                              type="number"
+                              type="text"
+                              [disabled]="!app.value.flagAlarmaMontoMinimo"
+                              [(ngModel)]="app.value.valueMontoMonedaLocal"
+                              [ngModelOptions]="{ standalone: true }"
+                              step="0.00"
+                              min="0"
+                              maxlength="12"
+                              currencyMask
+                              (click)="putCursorEnd($event)"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group row">
+                          <label class="col-sm-6 control-label col-form-label">
+                            Monto Moneda Extranjera:
+                          </label>
+                          <div class="col-sm-6">
+                            <input
+                              class="form-control"
+                              type="number"
+                              type="text"
+                              [disabled]="true"
+                              step="0.00"
+                              type="text"
+                              mask="separator.2"
+                              min="0"
+                              currencyMask
+                              [value]="
+                                calcularMonedaExtranjera(
+                                  app.value.valueMontoMonedaLocal,
+                                  app.key.capApplicationID
+                                )
+                              "
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <div class="hp-module-loader" *ngIf="isMerchantProfileSaveProccess">
+    <div class="hp-spinner hp-spinner-circle mr-3"></div>
+  </div>
+</div>
