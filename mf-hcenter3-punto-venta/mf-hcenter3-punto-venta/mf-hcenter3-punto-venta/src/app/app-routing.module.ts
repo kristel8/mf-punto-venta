@@ -17,23 +17,24 @@ import { TerminalCreateComponent } from './components/terminal/terminal-create/t
 import { TerminalEditComponent } from './components/terminal/terminal-edit/terminal-edit.component';
 import { TerminalListComponent } from './components/terminal/terminal-list/terminal-list.component';
 import { EmptyRouteComponent } from './empty-route/empty-route.component';
+import { ActiveGuardGuard } from './shared/guards/active-guard.guard';
 
 const routes: Routes = [
-  { path: 'config-red/perfil-comercio', component: ProfileCommerceListComponent},
-  { path: 'config-red/perfil-comercio/crear-perfil', component: ProfileCommerceCreateComponent},
-  { path: 'config-red/perfil-comercio/editar-perfil', component: ProfileCommerceEditComponent},
-  { path: 'config-red/comercio', component: CommerceListComponent},
-  { path: 'config-red/comercio/crear-comercio', component: CommerceCreateComponent},
-  { path: 'config-red/comercio/editar-comercio/:cmrMerchantId', component: CommerceEditComponent},
-  { path: 'config-red/terminal', component: TerminalListComponent},
-  { path: 'config-red/terminal/crear-terminal', component: TerminalCreateComponent},
-  { path: 'config-red/terminal/editar-terminal', component: TerminalEditComponent},
-  { path: 'config-red/cadena-comercio', component: ChainCommerceListComponent},
-  { path: 'config-red/cadena-comercio/crear-cadena', component: ChainCommerceCreateComponent},
-  { path: 'config-red/cadena-comercio/editar-cadena', component: ChainCommerceEditComponent},
-  { path: 'config-red/cupo-comercio', component: QuotasCommerceListComponent},
-  { path: 'config-red/cupo-comercio/crear-cupo', component: QuotasCommerceCreateComponent},
-  { path: 'config-red/cupo-comercio/editar-cupo', component: QuotasCommerceEditComponent},
+  { path: 'config-red/perfil-comercio', component: ProfileCommerceListComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/perfil-comercio/crear-perfil', component: ProfileCommerceCreateComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/perfil-comercio/editar-perfil', component: ProfileCommerceEditComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/comercio', component: CommerceListComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/comercio/crear-comercio', component: CommerceCreateComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/comercio/editar-comercio/:cmrMerchantId', component: CommerceEditComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/terminal', component: TerminalListComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/terminal/crear-terminal', component: TerminalCreateComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/terminal/editar-terminal', component: TerminalEditComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/cadena-comercio', component: ChainCommerceListComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/cadena-comercio/crear-cadena', component: ChainCommerceCreateComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/cadena-comercio/editar-cadena', component: ChainCommerceEditComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/cupo-comercio', component: QuotasCommerceListComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/cupo-comercio/crear-cupo', component: QuotasCommerceCreateComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/cupo-comercio/editar-cupo', component: QuotasCommerceEditComponent, canActivate: [ActiveGuardGuard]},
   { path: '**', component: EmptyRouteComponent }
 
 ];
