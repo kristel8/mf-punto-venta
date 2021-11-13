@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'config-red/terminal/editar-terminal', component: TerminalEditComponent, canActivate: [ActiveGuardGuard]},
   { path: 'config-red/cadena-comercio', component: ChainCommerceListComponent, canActivate: [ActiveGuardGuard]},
   { path: 'config-red/cadena-comercio/crear-cadena', component: ChainCommerceCreateComponent, canActivate: [ActiveGuardGuard]},
-  { path: 'config-red/cadena-comercio/editar-cadena', component: ChainCommerceEditComponent, canActivate: [ActiveGuardGuard]},
+  { path: 'config-red/cadena-comercio/editar-cadena/:cmcchainID', component: ChainCommerceEditComponent, canActivate: [ActiveGuardGuard]},
   { path: 'config-red/cupo-comercio', component: QuotasCommerceListComponent, canActivate: [ActiveGuardGuard]},
   { path: 'config-red/cupo-comercio/crear-cupo', component: QuotasCommerceCreateComponent, canActivate: [ActiveGuardGuard]},
   { path: 'config-red/cupo-comercio/editar-cupo', component: QuotasCommerceEditComponent, canActivate: [ActiveGuardGuard]},
